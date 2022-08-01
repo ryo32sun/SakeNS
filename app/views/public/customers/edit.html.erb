@@ -1,7 +1,7 @@
 <h1>会員情報編集</h1>
 <%= form_with model: @customer do |f| %>
   <div>
-    <%#= image_tag @customer.get_profile_image %>
+    <%= image_tag @customer.get_profile_image(100,100) %>
     <%= f.file_field :profile_image, accept: "image/*" %>
   </div>
   <div>
