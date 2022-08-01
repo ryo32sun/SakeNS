@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>ジャンル一覧・新規登録</h1>
+  <div class="row">
+    <div class="col-5">
+      <h4>お酒ジャンル</h4>
+      <div>
+        <%= form_with model: @sake_genre, url: admin_genres_sake_create_path do |f| %>
+          <%= f.text_field :genre %>
+          <%= f.submit "登録" %>
+        <% end %>
+      </div>
+      <div class="border">
+        <% @sake_genres.each do |sake_genre| %>
+          <%= sake_genre.genre %>
+          <%= link_to "編集", edit_admin_genre_path(sake_genre), class:"btn btn-success" %><br>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-5">
+      <h4>お店ジャンル</h4>
+      <div>
+        <%= form_with model: @shop_genre, url: admin_genres_shop_create_path do |f| %>
+          <%= f.text_field :genre %>
+          <%= f.submit "登録" %>
+        <% end %>
+      </div>
+      <div class="border">
+        <% @shop_genres.each do |shop_genre| %>
+          <%= shop_genre.genre %>
+          <%= link_to "編集", edit_admin_genre_path(shop_genre), class:"btn btn-success" %><br>
+        <% end %>
+      </div>
+    </div>
+  </div> 
+</div>

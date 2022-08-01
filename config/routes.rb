@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :comments, only:[:index, :destroy]
-    resources :shop_genres, only:[:index, :create, :edit, :update]
+    resources :genres, only:[:index, :create, :edit, :update]
+    post "genres/sake_create"
+    post "genres/shop_create"
     resources :shops, only:[:index, :show, :update, :destroy]
     resources :shop_posts, only:[:index, :destroy]
     resources :sakes, only:[:index, :edit, :update, :destroy]
