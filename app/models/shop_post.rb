@@ -1,0 +1,2 @@
+class ShopPost < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class SakeGenre < ApplicationRecord
+end
