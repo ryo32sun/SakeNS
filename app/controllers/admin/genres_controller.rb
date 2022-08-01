@@ -20,6 +20,13 @@ class Admin::GenresController < ApplicationController
   end
 
   def edit
+    @sake_genre = SakeGenre.find(params[:id])
+  end
+  
+  def update
+    @sake_genre = SakeGenre.find(params[:id])
+    @sake_genre.update(sake_genre_params)
+    redirect_to admin_genres_path
   end
   
   private

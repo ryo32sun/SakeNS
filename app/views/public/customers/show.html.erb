@@ -4,7 +4,7 @@
     <div class="col-9">
       <div class="row">
         <div class="col-3">
-          <div style="height:100px; width:100px; background-color:blue;"></div>
+          <div><%= image_tag @customer.get_profile_image(150, 150) %></div>
           <%= link_to "お気に入り一覧", sake_favorites_index_path, class:"btn btn-primary" %>
         </div>
         <div class="col-4">
@@ -25,6 +25,8 @@
         <%= link_to "投稿一覧へ", sake_posts_path, class:"btn btn-primary" %>
       </div>
     </div>
-    <div class="col-2 offset-1 border">サイドバー</div>
+    <div class="col-2 offset-1 border">
+      <%= render "public/homes/sidebar" %>  
+    </div>
   </div>
 </div>

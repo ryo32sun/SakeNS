@@ -26,8 +26,7 @@
       </div>
       <div class="border">
         <% @shop_genres.each do |shop_genre| %>
-          <%= shop_genre.genre %>
-          <%= link_to "編集", edit_admin_genre_path(shop_genre), class:"btn btn-success" %><br>
+          <%= shop_genre.genre %><br>
         <% end %>
       </div>
     </div>
