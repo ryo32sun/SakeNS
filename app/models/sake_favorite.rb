@@ -1,0 +1,2 @@
+class SakeFavorite < ApplicationRecord
+end
