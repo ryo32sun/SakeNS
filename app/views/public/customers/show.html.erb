@@ -1,2 +1,30 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<div class="container">
+  <h2>マイページ</h2>
+  <div class="row">
+    <div class="col-9">
+      <div class="row">
+        <div class="col-3">
+          <div style="height:100px; width:100px; background-color:blue;"></div>
+          <%= link_to "お気に入り一覧", sake_favorites_index_path, class:"btn btn-primary" %>
+        </div>
+        <div class="col-4">
+          <p>ユーザー名：<%= @customer.name %></p>
+          <p>自己紹介：<%= @customer.introduction %></p>
+        </div>
+        <div>
+          <%= link_to "編集", edit_customer_path(@customer), class:"btn btn-success" %>
+        </div>
+      </div>
+      <p>新着投稿</p>
+      <% @posts.each do |sake_post| %>
+        <div class="col">
+          投稿
+        </div>
+      <% end %>
+      <div class="ml-auto col-2">
+        <%= link_to "投稿一覧へ", sake_posts_path, class:"btn btn-primary" %>
+      </div>
+    </div>
+    <div class="col-2 offset-1 border">サイドバー</div>
+  </div>
+</div>
