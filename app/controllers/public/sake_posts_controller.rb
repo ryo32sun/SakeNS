@@ -1,11 +1,23 @@
 class Public::SakePostsController < ApplicationController
   def index
+    @sake_posts = SakePost.page(params[:page]).order("created_at DESC")
   end
 
   def edit
+    @sake_post = SakePost.find(params[:id])
   end
-
+  
+  def update
+    @sake_post = SakePost.find(params[:id])
+    @sake_post.update(sake_post_params)
+    redirect_to sake_post_path(@sake_post)
+  end
+  
   def show
+    @sake_post = SakePost.find(params[:id])
+    @shop_posts = @sake_post.shop_posts.all
+    @sake = @sake_post.sake
+    @customer= @sake_post.customer
   end
 
   def new
@@ -13,20 +25,10 @@ class Public::SakePostsController < ApplicationController
     @genres = SakeGenre.all
   end
   
-  def create
-    # @sake_post = SakePost.new(sake_post_params)
-    # @sake = Sake.new
-    # @sake.sake_genre_id = params[:sake_post][:sake_genre_id]
-    # @sake.name = params[:sake_post][:name]
-    # @sake.prefectures = params[:sake_post][:prefectures]
-    # @sake.save
-    # @sake_post.sake_id = @sake.id
-    # @sake_post.customer_id = current_customer.id
-    # @sake_post.save
-    
-    # @shop_post = ShopPost.new
-    # @genres = ShopGenre.all
-    # render new_shop_post_path
+  def destroy
+    @sake_post = SakePost.find(params[:id])
+    @sake_post.destroy
+    redirect_to customer_path(current_customer)
   end
   
   private

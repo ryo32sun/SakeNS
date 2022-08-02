@@ -1,2 +1,46 @@
-<h1>Public::SakePosts#show</h1>
-<p>Find me in app/views/public/sake_posts/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div>
+        <h2>投稿詳細</h2>
+      </div>
+      <div>
+        <h5><%= link_to sake_path(@sake) do %>商品名：<%= @sake.name %><% end %></h5>
+      </div>
+      <div>
+        <%= image_tag @sake_post.get_image(500, 500) %>
+      </div>
+      <div>
+        <%= image_tag @customer.get_profile_image(100,100) %>
+        <%= @customer.name %>
+      </div>
+      <div>
+        <%= @sake_post.impression %>
+      </div>
+      <div>
+        <%= link_to "投稿削除",sake_post_path(@sake_post), method: :delete, class:"btn btn-danger" %> 
+      </div>
+      <div>
+        <% @shop_posts.each do |shop_post| %>
+        <div>
+          <h5><%= shop_post.shop.shop_genre.genre %></h5>
+        </div>
+        <div>
+          店名：<%= shop_post.shop.name %>
+          住所：<%= shop_post.shop.address %>
+        </div>
+        <div>
+          備考：<%= shop_post.shop.remark %>
+        </div>
+        
+          <%= link_to "店情報削除", shop_post_path(shop_post),method: :delete, class:"btn btn-danger" %>
+        
+        <% end %>
+        <%= link_to "投稿編集", edit_sake_post_path(@sake_post), class:"btn btn-success" %>
+      </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>

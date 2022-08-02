@@ -1,2 +1,44 @@
-<h1>Public::Sakes#show</h1>
-<p>Find me in app/views/public/sakes/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <h1>お酒詳細</h1>
+      <div class="row">
+        <div><%= @sake.name %></div>
+        <div id="star-rate"><%= @sake.sake_posts.average(:rate).to_f.round(1) %>点</div>
+        <script>
+          $('#star-rate').raty({
+            size: 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: "<%= @sake.sake_posts.average(:rate).to_f.round(1) %>",
+          });
+        </script>
+      </div>
+      <div><%= image_tag @sake.get_image(500, 500) %></div>
+      <div class="row">
+        <% @sake_posts.each do |sake_post| %>
+          <div class="col-3 offset-1">
+            <%= link_to sake_post_path(sake_post) do %>
+            <div><%= sake_post.sake.name %></div>
+            <div><%= image_tag sake_post.get_image(100, 100) %></div>
+            <div>
+              <%= image_tag sake_post.customer.get_profile_image(50, 50) %>
+              <%= sake_post.impression %>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="text-right"><%= link_to "もっと見る", sake_posts_path %></div>
+      <div class="row">
+        
+      </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>
