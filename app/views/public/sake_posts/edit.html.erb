@@ -1,2 +1,93 @@
-<h1>Public::SakePosts#edit</h1>
-<p>Find me in app/views/public/sake_posts/edit.html.erb</p>
+<h1>投稿編集（お酒）</h1>
+<div>
+  <div class="form">
+    <%= form_with model: @sake_post do |f| %>
+      <div>
+        <%= f.label :name, "商品名" %>
+        <%= @sake_post.sake.name %>
+      </div>
+      <div>
+        <%= f.label :sake_genre_id, "種類" %>
+        <%= @sake_post.sake.sake_genre.genre %>
+      </div>
+      <div>
+        <%= f.label :prefectures, "都道府県" %>
+        <%= @sake_post.sake.prefectures %>
+      </div>
+      <div>
+        <%= f.label "画像" %>
+        <%= f.file_field :image, accept: "image/*" %>
+        <%= image_tag @sake_post.get_image(200, 200) %>
+      </div>
+      <div>
+        <%= f.label :feature, "特徴" %>
+        <%= f.text_area :feature %>
+      </div>
+      <div>
+        <%= f.label :impression, "感想" %>
+        <%= f.text_area :impression %>
+      </div>
+      <div id="star">
+        <%= f.label :rate, "レビュー" %>
+        <%= f.hidden_field :rate, id: :review_star %>
+      </div>
+      <script>
+        $('#star').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          scoreName: 'sake_post[rate]',
+          half: true,
+        });
+      </script>  
+      <div>
+        <%= f.submit "更新", class:"btn btn-info" %>
+      </div>
+    <% end %>
+  </div>
+  <h1>投稿編集（お店）</h1>
+  <% @sake_post.shop_posts.each do |shop_post| %>
+  <div>
+    <%= form_with model: shop_post, url: shop_post_path(shop_post) do |f| %>
+      <div>
+        <%= f.label :name, "店名" %>
+        <%= shop_post.shop.name %>
+      </div>
+      <div>
+        <%= f.label :shop_genre_id, "種類" %>
+        <%= shop_post.shop.shop_genre.genre %>
+      </div>
+      <div>
+        <%= f.label :prefectures, "都道府県" %>
+        <%= shop_post.shop.prefectures %>
+      </div>
+      <div>
+        <%= f.label :address, "住所" %>
+        <%= shop_post.shop.address %>
+      </div>
+      <div>
+        <%= f.label :remark, "備考" %>
+        <%= shop_post.shop.remark %>
+      </div>
+      <div id="shop-star">
+        <%= f.label :rate, "レビュー" %>
+        <%= f.hidden_field :rate, id: :review_star %>
+      </div>
+      <script>
+        $('#shop-star').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          scoreName: 'shop[rate]',
+          half: true,
+        });
+      </script>  
+      <div>
+        <%= f.submit "更新", class:"btn btn-info" %>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>

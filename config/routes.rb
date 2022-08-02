@@ -31,9 +31,10 @@ Rails.application.routes.draw do
     end
     get "sake_favorites/index"
     resources :sakes, only:[:index, :show]
-    resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new, :create]
+    resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new]
     resources :shops, only:[:index, :show]
-    resources :shop_posts, only:[:update, :destroy, :new, :create]
+    post "shop_posts/new"
+    resources :shop_posts, only:[:update, :destroy, :create]
     get 'searches/index'
     get 'searches/form'
   end

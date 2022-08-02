@@ -1,2 +1,29 @@
-<h1>Public::Sakes#index</h1>
-<p>Find me in app/views/public/sakes/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <h1>お酒一覧</h1>
+      <div class="row">
+        <% @sakes.each do |sake| %>
+          <div class="col-3 offset-1 border">
+            <%= link_to sake_path(sake) do %>
+            <div><%= sake.name %></div>
+            <div><%= sake.prefectures %></div>
+            <div><%= sake.sake_genre.genre %></div>
+            <div>
+              <%#= image_tag SakePost.find_by(sake_id: sake.id).get_image(100, 100) %>
+            </div>
+            <div>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= paginate @sakes %>
+      </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>
