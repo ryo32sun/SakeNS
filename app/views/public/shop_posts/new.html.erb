@@ -1,2 +1,45 @@
-<h1>Public::ShopPosts#new</h1>
-<p>Find me in app/views/public/shop_posts/new.html.erb</p>
+<h1>新規投稿（お店）</h1>
+<div>
+  <div class="form">
+    <%= form_with model: @shop,url: shop_posts_path do |f| %>
+      <%= f.hidden_field :sake_post_id, :value => @sake_post.id %>
+      <div>
+        <%= f.label :name, "店名" %>
+        <%= f.text_field :name %>
+      </div>
+      <div>
+        <%= f.label :shop_genre_id, "種類" %>
+        <%= f.select :shop_genre_id, @genres.map{|genre| [genre.genre, genre.id] } %>
+      </div>
+      <div>
+        <%= f.label :prefectures, "都道府県" %>
+        <%= f.select :prefectures,   Shop.prefectures.keys, {} %>
+      </div>
+      <div>
+        <%= f.label :address, "住所" %>
+        <%= f.text_field :address %>
+      </div>
+      <div>
+        <%= f.label :remark, "備考" %>
+        <%= f.text_area :remark %>
+      </div>
+      <div id="star">
+        <%= f.label :rate, "レビュー" %>
+        <%= f.hidden_field :rate, id: :review_star %>
+      </div>
+      <script>
+        $('#star').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          scoreName: 'shop[rate]',
+          half: true,
+        });
+      </script>  
+      <div>
+        <%= f.submit "投稿する", class:"btn btn-info" %>
+      </div>
+    <% end %>
+  </div>
+</div>

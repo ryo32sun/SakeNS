@@ -1,2 +1,30 @@
-<h1>Public::SakePosts#index</h1>
-<p>Find me in app/views/public/sake_posts/index.html.erb</p>
+<h1>酒投稿</h1>
+<% SakePost.all.each do |s_post| %>
+  <div class="border">
+    <%= s_post.sake.name %><br>
+    <%= image_tag s_post.get_image(150,150) %>
+    <%= s_post.sake_id %><br>
+    <%= s_post.feature %><br>
+    <%= s_post.impression %><br>
+    <div id="star-rate<%= s_post.id%>"></div>    
+    <script>
+      $('#star-rate<%= s_post.id%>').raty({
+        size      : 36,
+        starOff   : '<%= asset_path('star-off.png') %>',
+        starOn    : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        half      : true,
+        readOnly: true,
+        score: <%= s_post.rate %>,
+      });
+    </script>
+  </div>
+<% end %>
+
+<% Sake.all.each do |sake| %>
+  <div class="border">
+    <%= sake.name %><br>
+    <%= sake.sake_genre.genre %><br>
+    <%= sake.prefectures %><br>
+  </div>
+<% end %>

@@ -1,2 +1,48 @@
-<h1>Public::SakePosts#new</h1>
-<p>Find me in app/views/public/sake_posts/new.html.erb</p>
+<h1>新規投稿（お酒）</h1>
+<div>
+  <div class="form">
+    <%= form_with model: @sake_post, url: shop_posts_new_path do |f| %>
+      <div>
+        <%= f.label :name, "商品名" %>
+        <%= f.text_field :name %>
+      </div>
+      <div>
+        <%= f.label :sake_genre_id, "種類" %>
+        <%= f.select :sake_genre_id, @genres.map{|genre| [genre.genre, genre.id] } %>
+      </div>
+      <div>
+        <%= f.label :prefectures, "都道府県" %>
+        <%= f.select :prefectures, Sake.prefectures.keys, {} %>
+      </div>
+      <div>
+        <%= f.label "画像" %>
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+      <div>
+        <%= f.label :feature, "特徴" %>
+        <%= f.text_area :feature %>
+      </div>
+      <div>
+        <%= f.label :impression, "感想" %>
+        <%= f.text_area :impression %>
+      </div>
+      <div id="star">
+        <%= f.label :rate, "レビュー" %>
+        <%= f.hidden_field :rate, id: :review_star %>
+      </div>
+      <script>
+        $('#star').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          scoreName: 'sake_post[rate]',
+          half: true,
+        });
+      </script>  
+      <div>
+        <%= f.submit "投稿/お店の登録へ進む", class:"btn btn-info" %>
+      </div>
+    <% end %>
+  </div>
+</div>
