@@ -5,9 +5,9 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :sake_posts
-  has_many :sake_comments
-  has_many :sake_favorites
-  has_many :shop_favorites
+  has_many :sake_comments, dependent: :destroy
+  has_many :sake_favorites, dependent: :destroy
+  has_many :shop_favorites, dependent: :destroy
 
   has_one_attached :profile_image
 

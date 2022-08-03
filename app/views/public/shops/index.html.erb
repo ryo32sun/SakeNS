@@ -1,2 +1,56 @@
-<h1>Public::Shops#index</h1>
-<p>Find me in app/views/public/shops/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div>
+        <% if @genre != nil %>
+          <h1><%= @genre.genre %>一覧</h1>
+        <% else %>
+          <h1>お店一覧</h1>
+        <% end %>
+      </div>
+      <div>
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr class="table-secondary">
+              <th>店名</th>
+              <th>業態</th>
+              <th>住所</th>
+              <th>平均評価</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @shops.each do |shop| %>
+              <tr>
+                <td><%= shop.name %></td>
+                <td><%= shop.shop_genre.genre %></td>
+                <td><%= shop.address %></td>
+                <td><div id="star-rate-<%= shop.id %>"></div>
+                  <script>
+                   $('#star-rate-<%= shop.id %>').empty();
+                    $('#star-rate-<%= shop.id %>').raty({
+                      size: 36,
+                      starOff:  '<%= asset_path('star-off.png') %>',
+                      starOn : '<%= asset_path('star-on.png') %>',
+                      starHalf: '<%= asset_path('star-half.png') %>',
+                      half: true,
+                      readOnly: true,
+                      score: "<%= shop.shop_posts.average(:rate).to_f.round(1) %>",
+                    });
+                  </script>
+                </td>
+                <td><%= link_to "詳細", shop_path(shop), class:"btn btn-primary" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div>
+          <%= paginate @shops %>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,7 @@ class Public::SakePostsController < ApplicationController
     @shop_posts = @sake_post.shop_posts.all
     @sake = @sake_post.sake
     @customer= @sake_post.customer
+    @sake_comment = SakeComment.new
   end
 
   def new

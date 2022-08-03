@@ -5,6 +5,11 @@ class Shop < ApplicationRecord
   has_many :shop_posts, dependent: :destroy
   has_many :shop_favorites, dependent: :destroy
   
+  def self.search(search_word)
+    Shop.where(["shop_genre_id LIKE ?", "#{search_word}"])
+  end
+  
+  
   enum prefectures:{
     "選択してください":0,
     北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,

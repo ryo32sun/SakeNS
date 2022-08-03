@@ -9,6 +9,9 @@ class Sake < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
 
+  def self.search(search_word)
+    Sake.where(["sake_genre_id LIKE ?", "#{search_word}"])
+  end
   
   enum prefectures:{
     "選択してください":0,

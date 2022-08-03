@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :sake_posts, only:[:index, :update, :destroy, :show, :edit]
     resources :customers, only:[:index, :show, :edit, :update]
   end
+  
   scope module: :public do
     get "customers/check"
     patch "customers/out"
@@ -27,11 +28,14 @@ Rails.application.routes.draw do
       resource :sake_favorites, only:[:create, :destroy]
       resource :shop_favorites, only:[:create, :destroy]
       get "shop_favorites/index"
-      resources :sake_comments, only:[:create, :destroy]
     end
     get "sake_favorites/index"
+    get "search_sake" => "sakes#search"
     resources :sakes, only:[:index, :show]
-    resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new]
+    resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
+      resources :sake_comments, only:[:create, :destroy]
+    end
+    get "search_shop" => "shops#search"
     resources :shops, only:[:index, :show]
     post "shop_posts/new"
     resources :shop_posts, only:[:update, :destroy, :create]
