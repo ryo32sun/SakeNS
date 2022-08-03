@@ -6,6 +6,7 @@
         <div><%= @sake.name %></div>
         <div id="star-rate"><%= @sake.sake_posts.average(:rate).to_f.round(1) %>点</div>
         <script>
+         $('#star-rate').empty();
           $('#star-rate').raty({
             size: 36,
             starOff:  '<%= asset_path('star-off.png') %>',

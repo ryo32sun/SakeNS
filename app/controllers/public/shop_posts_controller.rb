@@ -1,5 +1,6 @@
 class Public::ShopPostsController < ApplicationController
   def new
+    binding.pry
     @sake_post = SakePost.new(sake_post_params)
     @sake = Sake.new
     @sake.name = params[:sake_post][:name]

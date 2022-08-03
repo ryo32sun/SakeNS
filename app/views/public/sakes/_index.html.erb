@@ -1,0 +1,25 @@
+        <% sakes.each do |sake| %>
+          <div class="col-3 offset-1 border">
+            <%= link_to sake_path(sake) do %>
+            <div><%= sake.name %></div>
+            <div>
+              <%= image_tag sake.get_image(100, 100) %>
+            </div>
+            <div><%= sake.prefectures %></div>
+            <div><%= sake.sake_genre.genre %></div>
+            <div id="star-rate-<%= sake.id %>"><%= sake.sake_posts.average(:rate).to_f.round(1) %>点</div>
+            <script>
+             $('#star-rate-<%= sake.id %>').empty();
+              $('#star-rate-<%= sake.id %>').raty({
+                size: 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                readOnly: true,
+                score: "<%= sake.sake_posts.average(:rate).to_f.round(1) %>",
+              });
+            </script>
+            <% end %>
+          </div>
+        <% end %>

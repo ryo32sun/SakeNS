@@ -38,6 +38,30 @@
         <% end %>
         <%= link_to "投稿編集", edit_sake_post_path(@sake_post), class:"btn btn-success" %>
       </div>
+      <div>
+        <p>コメント件数:<%= @sake_post.sake_comments.count %>件</p>
+        <% @sake_post.sake_comments.each do |comment| %>
+          <div class="row">
+            <div><%= image_tag comment.customer.get_profile_image(100,100) %></div>
+            <div>
+              ユーザー名：<%= comment.customer.name %><br>
+              コメント内容：<%= comment.comment %><br>
+              投稿日：<%= comment.created_at.strftime("%m/%d") %>
+            </div>
+            <% if comment.customer == current_customer %>
+              <div>
+                <%= link_to "コメント削除", sake_post_sake_comment_path(comment.sake_post, comment), method: :delete, class:"btn btn-danger" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <%= form_with model: [@sake_post, @sake_comment] do |f| %>
+          <%= f.text_area :comment, placeholder: "コメントを入力" %>
+          <%= f.submit "送信する" ,class:"btn btn-info" %>
+        <% end %>
+      </div>
     </div>
     <div class="col-2 offset-1">
       <%= render "public/homes/sidebar" %>

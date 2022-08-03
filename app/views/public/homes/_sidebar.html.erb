@@ -1,8 +1,18 @@
 <h5>酒ジャンル検索</h5>
 <div>
+  <ul>
   <% SakeGenre.all.each do |genre| %>
     <div>
-      <%= genre.genre %>
+      <li><%= link_to genre.genre, search_sake_path(keyword: genre.id) %></li>
     </div>
   <% end %>
+  </ul>
+</div>
+<h5>店ジャンル検索</h5>
+<div>
+  <ul>
+    <% ShopGenre.all.each do |genre| %>
+      <li><%= link_to genre.genre, search_shop_path(keyword: genre.id) %></li>
+    <% end %>
+  </ul>
 </div>

@@ -1,21 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-9">
-      <h1>お酒一覧</h1>
+      <h1>
+        お酒一覧
+        <% if @genre != nil %>
+          (<%= @genre.genre %>)
+        <% end %>
+      </h1>
       <div class="row">
-        <% @sakes.each do |sake| %>
-          <div class="col-3 offset-1 border">
-            <%= link_to sake_path(sake) do %>
-            <div><%= sake.name %></div>
-            <div><%= sake.prefectures %></div>
-            <div><%= sake.sake_genre.genre %></div>
-            <div>
-              <%#= image_tag SakePost.find_by(sake_id: sake.id).get_image(100, 100) %>
-            </div>
-            <div>
-            </div>
-            <% end %>
-          </div>
+        <% if @sakes.any? %>
+          <%= render "public/sakes/index", sakes: @sakes %>
+        <% else %>
+          <p>最初の投稿をお待ちしております！</p>
         <% end %>
       </div>
       <div>
