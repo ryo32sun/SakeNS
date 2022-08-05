@@ -14,4 +14,23 @@ class Public::ShopsController < ApplicationController
     @genre = ShopGenre.find_by(id: genre_id)
     render :index
   end
+  
+  def prefectures
+    prefectures = params[:prefectures]
+    @shops = Shop.where(prefectures: prefectures).page(params[:page]).order("created_at DESC")
+    render :index
+  end
+  
+  def rate
+    if params[:shops] != nil
+      shop_ids = params[:shops].split(",")
+      shops = Shop.where(id: shop_ids).select{ |shop| shop.shop_posts.average(:rate) >= 4}
+      @shops = Kaminari.paginate_array(shops).page(params[:page]) 
+      #配列にページネーションをする際は"Kaminari.paginate_array(配列)"と記述する
+      render :index
+    else
+      redirect_to shops_path
+    end
+  end
+
 end

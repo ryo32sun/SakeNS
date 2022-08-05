@@ -2,6 +2,24 @@
   <div class="row">
     <div class="col-9">
       <div>
+        <%= form_with url: search_shop_prefectures_path do |f| %>
+          <%= f.label :prefectures, "所在地で絞り込み" %>
+          <%= f.select :prefectures, Shop.prefectures.keys, {} %>
+          <% @shops.each do |shop| %>
+            <%= f.hidden_field :shops, :multiple => true, :value => shop.id %>
+          <% end %>
+          <%= f.submit "絞り込み", class:"btn btn-info" %>
+        <% end %>
+      </div>
+      <div>
+        <%= form_with url: search_shop_rate_path do |d| %>
+          <% @shops.each do |shop| %>
+            <%= d.hidden_field :shops, :multiple => true, :value => shop.id %>
+          <% end %>
+          <%= d.submit "高評価のみを表示する" %>
+        <% end %>
+      </div>
+      <div>
         <% if @genre != nil %>
           <h1><%= @genre.genre %>一覧</h1>
         <% else %>

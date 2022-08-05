@@ -1,2 +1,27 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <%= form_with model: @customer, url: admin_customer_path(@customer) do |f| %>
+        <div>
+          <%= f.label :name, "ユーザー名" %>
+          <%= f.text_field :name %>
+        </div>
+        <div>
+          <%= f.label :email, "メールアドレス" %>
+          <%= f.email_field :email %>
+        </div>
+        <div>
+          <%= f.label :introduction, "自己紹介" %>
+          <%= f.text_area :introduction %>
+        </div>
+        <div>
+          <%= f.radio_button :is_deleted, false %>
+          <%= f.label "有効" %>
+          <%= f.radio_button :is_deleted, true %>
+          <%= f.label "退会" %>
+        </div>
+        <%= f.submit "保存", class:"btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
