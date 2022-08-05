@@ -1,2 +1,31 @@
-<h1>Admin::Sakes#edit</h1>
-<p>Find me in app/views/admin/sakes/edit.html.erb</p>
+<h1>編集（お酒）</h1>
+<div>
+  <div class="form">
+    <%= form_with model: @sake, url: admin_sake_path(@sake) do |f| %>
+      <div>
+        <%= f.label :name, "商品名" %>
+        <%= f.text_field :name %>
+      </div>
+      <div>
+        <%= f.label :sake_genre_id, "種類" %>
+        <%= f.select :sake_genre_id, @genres.map{|genre| [genre.genre, genre.id] } %>
+      </div>
+      <div>
+        <%= f.label :prefectures, "都道府県" %>
+        <%= f.select :prefectures, Sake.prefectures.keys, {} %>
+      </div>
+      <div>
+        <%= f.label "登録されている画像" %>
+        <%= image_tag @sake.get_image(100,100) %>
+      </div>
+      <div>
+        <%= f.label "画像" %>
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+      <div>
+        <%= f.submit "更新", class:"btn btn-success" %>
+        <%= link_to "削除", admin_sake_path(@sake), method: :delete, class:"btn btn-danger", data: {confirm: "削除しますか？"} %>
+      </div>
+    <% end %>
+  </div>
+</div>

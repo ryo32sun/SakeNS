@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :genres, only:[:index, :create, :edit, :update]
     post "genres/sake_create"
     post "genres/shop_create"
-    resources :shops, only:[:index, :show, :update, :destroy]
+    resources :shops, only:[:index, :edit, :update, :destroy]
     resources :shop_posts, only:[:index, :destroy]
     resources :sakes, only:[:index, :edit, :update, :destroy]
     resources :sake_posts, only:[:index, :update, :destroy, :show, :edit]

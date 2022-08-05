@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(version: 2022_08_01_061258) do
   create_table "shop_posts", force: :cascade do |t|
     t.integer "shop_id", null: false
     t.integer "sake_post_id", null: false
+    t.integer "customer_id", null: false
     t.float "rate", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

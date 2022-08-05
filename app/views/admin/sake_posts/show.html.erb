@@ -1,2 +1,30 @@
-<h1>Admin::SakePosts#show</h1>
-<p>Find me in app/views/admin/sake_posts/show.html.erb</p>
+<div class="container">
+  <span><h1>投稿詳細</h1></span>投稿ユーザー: <%= @sake_post.customer.name %>
+  <div class="row">
+    <div>
+      商品名:<%= @sake.name %>
+    </div>
+    <div>
+      種類:<%= @genre.genre %>
+    </div>
+    <div>
+      生産地:<%= @sake.prefectures %>
+    </div>
+  </div>
+  <div>
+    <%= image_tag @sake_post.get_image(500,500) %>
+  </div>
+  <div>
+    特徴:<%= @sake_post.feature %>
+  </div>
+  <div>
+    感想:<%= @sake_post.impression %>
+  </div>
+  <div>
+    評価:<%= @sake_post.rate %> 点
+  </div>
+  <div>
+    <%= link_to "編集", edit_admin_sake_post_path(@sake_post), class:"btn btn-success" %>
+    <%= link_to "投稿を削除", admin_sake_post_path(@sake_post), method: :delete, class:"btn btn-danger" %>
+  </div>
+</div>
