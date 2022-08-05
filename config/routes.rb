@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     resources :shops, only:[:index, :show]
     post "shop_posts/new"
     resources :shop_posts, only:[:update, :destroy, :create]
-    get 'searches/index'
+    get 'searches/search'
     get 'searches/form'
   end
   

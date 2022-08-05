@@ -9,6 +9,9 @@ class Shop < ApplicationRecord
     Shop.where(["shop_genre_id LIKE ?", "#{search_word}"])
   end
   
+  def self.look(word)
+    Shop.where("name LIKE?","%#{word}%")
+  end
   
   enum prefectures:{
     "選択してください":0,
