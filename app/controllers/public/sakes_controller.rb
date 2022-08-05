@@ -14,4 +14,24 @@ class Public::SakesController < ApplicationController
     @genre = SakeGenre.find_by(id: genre_id)
     render :index
   end
+  
+  def prefectures
+    prefectures = params[:prefectures]
+    @sakes = Sake.where(prefectures: prefectures).page(params[:page]).order("created_at DESC")
+    render :index
+  end
+  
+  def rate
+    # binding.pry
+    if params[:sakes] != nil
+      sake_ids = params[:sakes].split(",")
+      sakes = Sake.where(id: sake_ids).select{ |sake| sake.sake_posts.average(:rate) >= 4}
+      @sakes = Kaminari.paginate_array(sakes).page(params[:page]) 
+      #配列にページネーションをする際は"Kaminari.paginate_array(配列)"と記述する
+      render :index
+    else
+      redirect_to sakes_path
+    end
+  end
+  
 end

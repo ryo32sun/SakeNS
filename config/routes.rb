@@ -31,17 +31,26 @@ Rails.application.routes.draw do
     end
     get "sake_favorites/index"
     get "search_sake" => "sakes#search"
+    post "search_sake_prefectures" => "sakes#prefectures" #都道府県で絞り込み
+    post "search_sake_rate" => "sakes#rate" #rateで絞り込み
     resources :sakes, only:[:index, :show]
     resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
       resources :sake_comments, only:[:create, :destroy]
     end
     get "search_shop" => "shops#search"
+    post "search_shop_prefectures" => "shops#prefectures"
+    post "search_shop_rate" => "shops#rate"
     resources :shops, only:[:index, :show]
     post "shop_posts/new"
     resources :shop_posts, only:[:update, :destroy, :create]
     get 'searches/index'
     get 'searches/form'
   end
+  
+  devise_scope :customer do
+    post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
