@@ -1,0 +1,31 @@
+<h1>編集（お酒）</h1>
+<div>
+  <div class="form">
+    <%= form_with model: @shop, url: admin_shop_path(@shop) do |f| %>
+      <div>
+        <%= f.label :name, "商品名" %>
+        <%= f.text_field :name %>
+      </div>
+      <div>
+        <%= f.label :shop_genre_id, "種類" %>
+        <%= f.select :shop_genre_id, @genres.map{|genre| [genre.genre, genre.id] } %>
+      </div>
+      <div>
+        <%= f.label :prefectures, "都道府県" %>
+        <%= f.select :prefectures, Shop.prefectures.keys, {} %>
+      </div>
+      <div>
+        <%= f.label :address, "住所" %>
+        <%= f.text_field :address %>
+      </div>
+      <div>
+        <%= f.label :remark, "備考" %>
+        <%= f.text_area :remark %>
+      </div>
+      <div>
+        <%= f.submit "更新", class:"btn btn-success" %>
+        <%= link_to "削除", admin_shop_path(@shop), method: :delete, class:"btn btn-danger", data: {confirm: "削除しますか？"} %>
+      </div>
+    <% end %>
+  </div>
+</div>

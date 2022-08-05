@@ -1,2 +1,36 @@
-<h1>Admin::Sakes#index</h1>
-<p>Find me in app/views/admin/sakes/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9 mx-auto">
+      <div>
+        <h1>お酒一覧</h1>
+      </div>
+      <div>
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr class="table-secondary">
+              <th></th>
+              <th>商品名</th>
+              <th>生産地</th>
+              <th>ジャンル</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @sakes.each do |sake| %>
+              <tr>
+                <td><%= image_tag sake.get_image(50,50) %></td>
+                <td><%= sake.name %></td>
+                <td><%= sake.prefectures %></td>
+                <td><%= sake.sake_genre.genre %></td>
+                <td><%= link_to "編集", edit_admin_sake_path(sake), class:"btn btn-success" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div>
+          <%= paginate @sakes %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

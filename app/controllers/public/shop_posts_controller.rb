@@ -31,6 +31,7 @@ class Public::ShopPostsController < ApplicationController
     @shop_post.shop_id = @shop.id
     @shop_post.rate = params[:shop][:rate]
     @shop_post.sake_post_id = params[:shop][:sake_post_id]
+    @shop_post.customer_id = current_customer.id
     if @shop_post.save
       redirect_to sake_post_path(@shop_post.sake_post_id)
     else
@@ -44,6 +45,12 @@ class Public::ShopPostsController < ApplicationController
     redirect_to request.referer
   end
   
+  def update
+    shop_post = ShopPost.find(params[:id])
+    shop_post.update(shop_post_params)
+    redirect_to request.referer
+  end
+  
   private
   
   def shop_params
@@ -52,6 +59,10 @@ class Public::ShopPostsController < ApplicationController
   
   def sake_post_params
     params.require(:sake_post).permit(:image, :feature, :impression, :rate)
+  end
+  
+  def shop_post_params
+    params.require(:shop_post).permit(:rate)
   end
   
 end
