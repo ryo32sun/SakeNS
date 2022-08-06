@@ -7,6 +7,9 @@
           (<%= @genre.genre %>)
         <% end %>
       </h1>
+      <% if @word != nil %>
+        <h3>検索ワード: "<%= @word %>"</h3>
+      <% end %>
       <div>
         <%= form_with url: search_sake_prefectures_path do |f| %>
           <%= f.label :prefectures, "生産地で絞り込み" %>
@@ -24,6 +27,9 @@
           <% end %>
           <%= d.submit "高評価のみを表示する" %>
         <% end %>
+      </div>
+      <div>
+        <%= render "public/searches/form" %>
       </div>
       <div class="row">
         <% if @sakes.any? %>

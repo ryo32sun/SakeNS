@@ -17,8 +17,23 @@
             score: "<%= @shop.shop_posts.average(:rate).to_f.round(1) %>",
           });
         </script>
+        <% if @shop.favorited_by?(current_customer) %>
+          <p>
+            <%= link_to shop_shop_favorites_path(@shop), method: :delete, class:"text-danger" do %>
+              ♥<%= @shop.shop_favorites.count %> 行きたい！
+            <% end %>
+          </p>
+          <% else %>
+          <p>
+            <%= link_to shop_shop_favorites_path(@shop), method: :post, class:"text-secondary" do %>
+              ♡<%= @shop.shop_favorites.count %> 行きたい！
+            <% end %>
+          </p>
+        <% end %>
       </div>
-      <div>地図</div>
+      <h3>店舗所在地</h3>
+      <!--The div element for the map -->
+      <div id="map"></div>
       <div><%= @shop.address %></div>
       <div><%= @shop.remark %></div>
       <div class="row">
@@ -45,3 +60,32 @@
     </div>
   </div>
 </div>
+
+
+
+<script>
+  
+let map;
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+  map = new google.maps.Map(document.getElementById('map'), {
+  center: {
+    lat: <%= @shop.latitude %>,
+    lng: <%= @shop.longitude %>
+  },
+  zoom: 16,
+  });
+  
+  merker = new google.maps.Marker({
+    position: {
+      lat: <%= @shop.latitude %>,
+      lng: <%= @shop.longitude %>
+    },
+    map: map
+  })
+}
+
+</script>
+<script async
+      src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
+</script>

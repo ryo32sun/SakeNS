@@ -5,10 +5,20 @@ class Shop < ApplicationRecord
   has_many :shop_posts, dependent: :destroy
   has_many :shop_favorites, dependent: :destroy
   
+  geocoded_by :address
+  after_validation :geocode
+  
   def self.search(search_word)
     Shop.where(["shop_genre_id LIKE ?", "#{search_word}"])
   end
   
+  def self.look(word)
+    Shop.where("name LIKE?","%#{word}%")
+  end
+  
+  def favorited_by?(customer)
+    shop_favorites.exists?(customer_id: customer.id)
+  end
   
   enum prefectures:{
     "選択してください":0,

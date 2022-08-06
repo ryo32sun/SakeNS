@@ -1,2 +1,20 @@
-<h1>Public::Searches#form</h1>
-<p>Find me in app/views/public/searches/form.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-6 mx-auto mt-4">
+      <h1>検索フォーム</h1>
+      <div class="mt-4"><%= render "form" %></div>
+      <div class="border p-1 mt-4">
+        <h5><span class="border">酒ジャンル検索</span></h5>
+        <% @genres.each do |genre| %>
+          <span class="pr-4"> ・<%= link_to genre.genre, search_sake_path(keyword: genre.id) %> </span>
+        <% end %>
+      </div>
+      <div class="border p-1 mt-4">
+        <h5><span class="border">店ジャンル検索</span></h5>
+        <% ShopGenre.all.each do |genre| %>
+          <div><span>・<%= link_to genre.genre, search_shop_path(keyword: genre.id) %></span></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

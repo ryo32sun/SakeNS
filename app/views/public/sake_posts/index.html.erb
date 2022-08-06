@@ -2,23 +2,7 @@
   <div class="row">
     <div class="col-9">
       <h1>投稿一覧（お酒）</h1>
-      <div class="row">
-        <% @sake_posts.each do |sake_post| %>
-          <div class="col-3 offset-1">
-            <%= link_to sake_post_path(sake_post) do %>
-            <div><%= sake_post.sake.name %></div>
-            <div><%= image_tag sake_post.get_image(100, 100) %></div>
-            <div>
-              <%= image_tag sake_post.customer.get_profile_image(50, 50) %>
-              <%= sake_post.impression %>
-            </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div>
-        <%= paginate @sake_posts %>
-      </div>
+      <%= render "index", sake_posts: @sake_posts %>
     </div>
     <div class="col-2 offset-1">
       <%= render "public/homes/sidebar" %>
