@@ -1,2 +1,32 @@
-<h1>Public::SakeFavorites#index</h1>
-<p>Find me in app/views/public/sake_favorites/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <h1>飲みたくなった投稿一覧</h1>
+      <div class="row">
+      <% @sake_favorites.each do |fav| %>
+        <div class="col-3 offset-1">
+          <%= link_to sake_post_path(fav.sake_post) do %>
+          <div><%= fav.sake_post.sake.name %></div>
+          <div><%= image_tag fav.sake_post.get_image(100, 100) %></div>
+          <div class="row">
+            <div class="col-3">
+              <%= image_tag fav.sake_post.customer.get_profile_image(50, 50) %><br>
+            </div>
+            <div class="col-5">
+              <%= fav.sake_post.impression %>
+            </div>
+          </div>
+          <div><%= fav.sake_post.customer.name %></div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <%= paginate @sake_favorites %>
+    </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>

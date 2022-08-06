@@ -17,6 +17,19 @@
             score: "<%= @shop.shop_posts.average(:rate).to_f.round(1) %>",
           });
         </script>
+        <% if @shop.favorited_by?(current_customer) %>
+          <p>
+            <%= link_to shop_shop_favorites_path(@shop), method: :delete, class:"text-danger" do %>
+              ♥<%= @shop.shop_favorites.count %> 行きたい！
+            <% end %>
+          </p>
+          <% else %>
+          <p>
+            <%= link_to shop_shop_favorites_path(@shop), method: :post, class:"text-secondary" do %>
+              ♡<%= @shop.shop_favorites.count %> 行きたい！
+            <% end %>
+          </p>
+        <% end %>
       </div>
       <h3>店舗所在地</h3>
       <!--The div element for the map -->

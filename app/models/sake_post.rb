@@ -9,6 +9,10 @@ class SakePost < ApplicationRecord
   
   has_one_attached :image
   
+  def favorited_by?(customer)
+    sake_favorites.exists?(customer_id: customer.id)
+  end
+  
   def get_image(width, height)
     image.variant(resize_to_limit: [width, height]).processed
   end

@@ -4,8 +4,21 @@
       <div>
         <h2>投稿詳細</h2>
       </div>
-      <div>
+      <div class="row">
         <h5><%= link_to sake_path(@sake) do %>商品名：<%= @sake.name %><% end %></h5>
+        <% if @sake_post.favorited_by?(current_customer) %>
+          <p>
+            <%= link_to sake_post_sake_favorites_path(@sake_post), method: :delete, class:"text-danger" do %>
+              ♥<%= @sake_post.sake_favorites.count %> 飲みたくなった！
+            <% end %>
+          </p>
+          <% else %>
+          <p>
+            <%= link_to sake_post_sake_favorites_path(@sake_post), method: :post, class:"text-secondary" do %>
+              ♡<%= @sake_post.sake_favorites.count %> 飲みたくなった！
+            <% end %>
+          </p>
+        <% end %>
       </div>
       <div>
         <%= image_tag @sake_post.get_image(500, 500) %>

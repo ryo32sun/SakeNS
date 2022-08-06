@@ -24,11 +24,7 @@ Rails.application.routes.draw do
   scope module: :public do
     get "customers/check"
     patch "customers/out"
-    resources :customers, only:[:show, :edit, :update] do
-      resource :sake_favorites, only:[:create, :destroy]
-      resource :shop_favorites, only:[:create, :destroy]
-      get "shop_favorites/index"
-    end
+    resources :customers, only:[:show, :edit, :update]
     get "sake_favorites/index"
     get "search_sake" => "sakes#search"
     post "search_sake_prefectures" => "sakes#prefectures" #都道府県で絞り込み
@@ -36,11 +32,15 @@ Rails.application.routes.draw do
     resources :sakes, only:[:index, :show]
     resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
       resources :sake_comments, only:[:create, :destroy]
+      resource :sake_favorites, only:[:create, :destroy]
     end
     get "search_shop" => "shops#search"
     post "search_shop_prefectures" => "shops#prefectures"
     post "search_shop_rate" => "shops#rate"
-    resources :shops, only:[:index, :show]
+    resources :shops, only:[:index, :show] do
+      resource :shop_favorites, only:[:create, :destroy]
+    end
+    get "shop_favorites/index"
     post "shop_posts/new"
     resources :shop_posts, only:[:update, :destroy, :create]
     get 'searches/search'
