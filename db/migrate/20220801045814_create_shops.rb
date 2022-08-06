@@ -6,6 +6,8 @@ class CreateShops < ActiveRecord::Migration[6.1]
       t.integer :prefectures, null: false
       t.string :address
       t.text :remark
+      t.float :latitude
+      t.float :longitude
 
       t.timestamps
     end

@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(version: 2022_08_01_061258) do
     t.integer "prefectures", null: false
     t.string "address"
     t.text "remark"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_shops_on_name", unique: true
