@@ -1,80 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-9">
-      <div>
-        <h2>投稿詳細</h2>
-      </div>
-      <div class="row">
-        <h5><%= link_to sake_path(@sake) do %>商品名：<%= @sake.name %><% end %></h5>
-        <% if @sake_post.favorited_by?(current_customer) %>
-          <p>
-            <%= link_to sake_post_sake_favorites_path(@sake_post), method: :delete, class:"text-danger" do %>
-              ♥<%= @sake_post.sake_favorites.count %> 飲みたくなった！
-            <% end %>
-          </p>
-          <% else %>
-          <p>
-            <%= link_to sake_post_sake_favorites_path(@sake_post), method: :post, class:"text-secondary" do %>
-              ♡<%= @sake_post.sake_favorites.count %> 飲みたくなった！
-            <% end %>
-          </p>
-        <% end %>
-      </div>
-      <div>
-        <%= image_tag @sake_post.get_image(500, 500) %>
-      </div>
-      <div>
-        <%= image_tag @customer.get_profile_image(100,100) %>
-        <%= @customer.name %>
-      </div>
-      <div>
-        <%= @sake_post.impression %>
-      </div>
-      <div>
-        <%= link_to "投稿削除",sake_post_path(@sake_post), method: :delete, class:"btn btn-danger" %> 
-      </div>
-      <div>
-        <% @shop_posts.each do |shop_post| %>
-        <div>
-          <h5><%= shop_post.shop.shop_genre.genre %></h5>
-        </div>
-        <div>
-          店名：<%= shop_post.shop.name %>
-          住所：<%= shop_post.shop.address %>
-        </div>
-        <div>
-          備考：<%= shop_post.shop.remark %>
-        </div>
-        
-          <%= link_to "店情報削除", shop_post_path(shop_post),method: :delete, class:"btn btn-danger" %>
-        
-        <% end %>
-        <%= link_to "投稿編集", edit_sake_post_path(@sake_post), class:"btn btn-success" %>
-      </div>
-      <div>
-        <p>コメント件数:<%= @sake_post.sake_comments.count %>件</p>
-        <% @sake_post.sake_comments.each do |comment| %>
-          <div class="row">
-            <div><%= image_tag comment.customer.get_profile_image(100,100) %></div>
-            <div>
-              ユーザー名：<%= comment.customer.name %><br>
-              コメント内容：<%= comment.comment %><br>
-              投稿日：<%= comment.created_at.strftime("%m/%d") %>
-            </div>
-            <% if comment.customer == current_customer %>
-              <div>
-                <%= link_to "コメント削除", sake_post_sake_comment_path(comment.sake_post, comment), method: :delete, class:"btn btn-danger" %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div>
-        <%= form_with model: [@sake_post, @sake_comment] do |f| %>
-          <%= f.text_area :comment, placeholder: "コメントを入力" %>
-          <%= f.submit "送信する" ,class:"btn btn-info" %>
-        <% end %>
-      </div>
+      <h3 class="mb-5 p-2 bg-secondary text-light border border-dark">
+        <span class="headline px-3">投 稿 詳 細<i class="fa-solid fa-beer-mug-empty ml-2"></i></span>
+      </h3>
+      <%= render "public/sake_posts/sake_show", sake: @sake, sake_post: @sake_post, customer: @customer %>
+      <%= render "public/sake_posts/shop_show", shop_posts: @shop_posts, customer: @customer %>
+      <%= render "public/sake_comments/comments", sake_post: @sake_post %>
+      <%= render "public/sake_comments/comment_form", sake_post: @sake_post, sake_comment: @sake_comment %>
     </div>
     <div class="col-2 offset-1">
       <%= render "public/homes/sidebar" %>

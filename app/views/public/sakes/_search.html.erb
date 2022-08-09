@@ -1,0 +1,27 @@
+<% if s_select != nil %>
+  <% if s_select == "1" %>
+    <div>
+      <%= form_with url: search_sake_prefectures_path do |f| %>
+        <%= f.label :prefectures, "生産地で絞り込み" %>
+        <%= f.select :prefectures, Sake.prefectures.keys, {} %>
+        <% sakes.each do |sake| %>
+          <%= f.hidden_field :sakes, :multiple => true, :value => sake.id %>
+        <% end %>
+        <%= f.submit "絞り込み", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  <% elsif s_select == "2" %>
+    <div>
+      <%= form_with url: search_sake_rate_path do |d| %>
+        <% sakes.each do |sake| %>
+          <%= d.hidden_field :sakes, :multiple => true, :value => sake.id %>
+        <% end %>
+        <%= d.submit "評価4.0以上のみを表示する" %>
+      <% end %>
+    </div>
+  <% elsif s_select == "3" %>
+    <div>
+      <%= render "public/searches/form" %>
+    </div>
+  <% end %>
+<% end %>

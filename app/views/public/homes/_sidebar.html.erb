@@ -1,18 +1,27 @@
-<h5>酒ジャンル検索</h5>
-<div>
-  <ul>
-  <% SakeGenre.all.each do |genre| %>
-    <div>
-      <li><%= link_to genre.genre, search_sake_path(keyword: genre.id) %></li>
-    </div>
-  <% end %>
-  </ul>
-</div>
-<h5>店ジャンル検索</h5>
-<div>
-  <ul>
-    <% ShopGenre.all.each do |genre| %>
-      <li><%= link_to genre.genre, search_shop_path(keyword: genre.id) %></li>
+
+<div class="border border-dark pb-5 pt-3">
+  <h5 class="ml-2"><b>酒ジャンル検索</b></h5>
+  <div>
+    <% SakeGenre.all.each do |genre| %>
+      <div class="ml-3">
+        <i class="fa-solid fa-whiskey-glass mr-2"></i><%= link_to genre.genre, search_sake_path(keyword: genre.id), class:"text-dark" %>
+      </div>
     <% end %>
-  </ul>
+  </div>
+  <h5 class="ml-2 mt-4"><b>店ジャンル検索</b></h5>
+  <div>
+    <% ShopGenre.all.each do |genre| %>
+    <div class="ml-3">
+      <i class="fa-solid fa-shop mr-2"></i><%= link_to genre.genre, search_shop_path(keyword: genre.id), class:"text-dark" %>
+    </div>
+    <% end %>
+  </div>
+  <h5 class="ml-2 mt-4"><b>キーワード検索</b></h5>
+  <div class="form-group px-2">
+    <%= form_with url: searches_search_path, local: true, method: :get do |f| %>
+      <%= f.text_field :word, placeholder: "検索内容を入力", class:"form-control mb-1" %>
+      <%= f.select :model, options_for_select([["お酒",'Sake'], ["お店",'Shop']]),{}, {class: 'form-control'}  %>
+      <%= f.submit "検索", class:"btn btn-primary mt-1 float-right" %>
+    <% end %>
+  </div>
 </div>

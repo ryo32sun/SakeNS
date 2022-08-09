@@ -1,0 +1,48 @@
+<div>
+  <% shop_posts.each do |shop_post| %>
+    <div>
+      <h5 class="mt-5 mb-4 p-2 bg-secondary text-light border border-dark">
+        <span class="headline px-3"><%= shop_post.shop.shop_genre.genre %></span>
+      </h5>
+    </div>
+    <div class="d-flex justify-content-between mb-2">
+      <h4 class="d-inline-flex">
+        店名：<u><%= link_to shop_post.shop.name, shop_path(shop_post.shop), class:"text-dark" %></u>
+      </h4>
+      <p class="d-inline-flex ml-auto text-truncate">住所：<%= shop_post.shop.address %></p>
+    </div>
+    <div id="map"></div>
+    <script>
+      let map;
+      function initMap(){
+        geocoder = new google.maps.Geocoder()
+        map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: <%= shop_post.shop.latitude %>,
+          lng: <%= shop_post.shop.longitude %>
+        },
+        zoom: 16,
+        });
+        
+        merker = new google.maps.Marker({
+          position: {
+            lat: <%= shop_post.shop.latitude %>,
+            lng: <%= shop_post.shop.longitude %>
+          },
+          map: map
+        })
+      }
+    </script>
+    <script async
+          src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
+    </script>
+    <div class="bg-secondary border border-dark p-1 mt-4 mb-2 text-white">
+      <span class="bg-white border border-dark text-dark px-1">備考</span><br>
+      <%= shop_post.shop.remark %>
+    </div>
+    <% if customer == current_customer %>
+      <%= link_to "店情報削除", shop_post_path(shop_post),method: :delete, class:"btn btn-danger float-right" %>
+    <% end %>
+  <% end %>
+</div>
+

@@ -1,25 +1,28 @@
-        <% sakes.each do |sake| %>
-          <div class="col-3 offset-1 border">
-            <%= link_to sake_path(sake) do %>
-            <div><%= sake.name %></div>
-            <div>
-              <%= image_tag sake.get_image(100, 100) %>
-            </div>
-            <div><%= sake.prefectures %></div>
-            <div><%= sake.sake_genre.genre %></div>
-            <div id="star-rate-<%= sake.id %>"><%= sake.sake_posts.average(:rate).to_f.round(1) %>点</div>
-            <script>
-             $('#star-rate-<%= sake.id %>').empty();
-              $('#star-rate-<%= sake.id %>').raty({
-                size: 36,
-                starOff:  '<%= asset_path('star-off.png') %>',
-                starOn : '<%= asset_path('star-on.png') %>',
-                starHalf: '<%= asset_path('star-half.png') %>',
-                half: true,
-                readOnly: true,
-                score: "<%= sake.sake_posts.average(:rate).to_f.round(1) %>",
-              });
-            </script>
-            <% end %>
-          </div>
-        <% end %>
+<div class="row">
+  <% sakes.each do |sake| %>
+    <div class="card text-white bg-secondary mb-3" style="width: calc(94% / 3); margin: 0 calc(6% / 6)">
+      <%= image_tag sake.get_image(500, 500), class:"bd-placeholder-img card-img-top", style:"height: 180px;" %>
+      <span class="sake-post-genre float-right px-1"><%= sake.sake_genre.genre %></span>
+      <div class="card-body">
+        <h5 class="card-title">商品名 : <%= sake.name %></h5>
+        <div class="card-text">生産地 : <%= sake.prefectures %></div>
+        <div id="star-rate-<%= sake.id %>" class="my-1"></div>
+        <span>評価 : <%= sake.sake_posts.average(:rate).to_f.round(1) %>点</span>
+        <script>
+         $('#star-rate-<%= sake.id %>').empty();
+          $('#star-rate-<%= sake.id %>').raty({
+            size: 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: "<%= sake.sake_posts.average(:rate).to_f.round(1) %>",
+          });
+        </script>
+        <span class="float-right"><%= link_to "詳細へ", sake_path(sake), class:"btn btn-primary mt-3" %></span>
+      </div>
+    </div>
+  <% end %> 
+</div>
+
