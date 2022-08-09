@@ -1,6 +1,6 @@
 class Public::ShopsController < ApplicationController
   def index
-    @shops = Shop.page(params[:page])
+    @shops = Shop.page(params[:page]).order("created_at DESC")
   end
 
   def show
@@ -19,6 +19,11 @@ class Public::ShopsController < ApplicationController
     prefectures = params[:prefectures]
     @shops = Shop.where(prefectures: prefectures).page(params[:page]).order("created_at DESC")
     render :index
+  end
+  
+  def shop_select
+    @select = params[:shop_select]
+    @shops = Shop.page(params[:page]).order("created_at DESC")
   end
   
   def rate

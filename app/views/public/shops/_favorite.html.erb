@@ -1,0 +1,15 @@
+<% if shop.favorited_by?(current_customer) %>
+  <h5 class="text-light mx-auto">
+    <span class="bg-danger px-2 rounded-pill">
+      ♥
+      <%= link_to "行きたい！(取り消す)", shop_shop_favorites_path(shop), method: :delete, remote: true, class:"text-light" %>
+    </span>
+  </h5>
+  <% else %>
+  <h5 class="text-danger mx-auto">
+    <span class="bg-light px-2 rounded-pill">
+      ♡
+      <%= link_to "行きたい！", shop_shop_favorites_path(shop), method: :post, remote: true, class:"text-danger" %>
+    </span>
+  </h5>
+<% end %>

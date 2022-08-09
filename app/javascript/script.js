@@ -14,3 +14,8 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $('#shop_select').change(function() {
+      $('.shop-select-btn').trigger('click')
+  });
+});

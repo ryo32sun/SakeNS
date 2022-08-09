@@ -1,6 +1,6 @@
 <div class="form-group">
-  <%= form_with model: [sake_post, sake_comment] do |f| %>
-    <%= f.text_area :comment, placeholder: "コメントを入力", class:"ml-1 form-control", rows:"4"  %>
+  <%= form_with model: [sake_post, sake_comment], local: false do |f| %>
+    <%= f.text_area :comment, placeholder: "コメントを入力", class:"ml-1 form-control border border-dark", rows:"4"  %>
     <%= f.submit "送信する" ,class:"btn btn-info float-right mt-2 border border-dark px-4" %>
   <% end %>
 </div>

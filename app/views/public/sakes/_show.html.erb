@@ -1,0 +1,33 @@
+<h3 class="mb-5 p-2 bg-secondary text-light border border-dark">
+  <span class="headline px-3">お 酒 詳 細<i class="fa-solid fa-martini-glass ml-2"></i></span>
+</h3>
+<div class="row">
+  <h4 class="ml-3">商品名：<%= link_to sake_path(sake),class:"text-dark" do %>
+    <b><u><%= sake.name %></u></b>
+  <% end %></h4>
+  <div class="mx-auto">
+    <h5 class="bg-secondary text-light p-1 px-2 border border-dark">ジャンル：<%= sake.sake_genre.genre %></h5>
+  </div>
+</div>
+<div><%= image_tag sake.get_image(1000, 450) %></div>
+<div class="row ml-2 mt-3">
+  <h5 class="col-6">生産地：<%= sake.prefectures %></h5>
+  <div class="col-6">
+    <div class="row">
+      <div id="star-rate"></div>
+      <h5 class="ml-2">平均評価: <%= sake.sake_posts.average(:rate).to_f.round(1) %>点</h5>
+    </div>
+  </div>
+</div>
+<script>
+ $('#star-rate').empty();
+  $('#star-rate').raty({
+    size: 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    half: true,
+    readOnly: true,
+    score: "<%= sake.sake_posts.average(:rate).to_f.round(1) %>",
+  });
+</script>

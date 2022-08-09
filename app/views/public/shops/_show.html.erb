@@ -1,0 +1,70 @@
+<h2 class="mb-2 p-2 bg-secondary text-light border border-dark">
+  <span class="headline px-3">
+    お 店 詳 細<i class="fa-solid fa-store ml-2"></i>
+  </span>
+</h2>
+<div class="row mb-4 mt-3">
+  <h4 class="ml-3">店名：<%= link_to shop_path(shop),class:"text-dark" do %>
+    <b><u><%= shop.name %></u></b>
+  <% end %></h4>
+  <div class="mx-auto shop-favorite-btn">
+    <%= render "public/shops/favorite", shop: shop %>
+  </div>
+  <div class="ml-auto mr-3">
+    <h5 class="bg-secondary text-light p-1 px-2 border border-dark">ジャンル：<%= shop.shop_genre.genre %></h5>
+  </div>
+</div>
+<!--The div element for the map -->
+<div id="map" class="border border-dark"></div>
+<table class="table table-bordered mt-4">
+  <tr>
+    <th>住所：</th>
+    <th><%= shop.address %></th>
+  </tr>
+  <tr>
+    <th>備考：</th>
+    <th><%= shop.remark %></th>
+  </tr>
+  <tr>
+    <th>平均評価：</th>
+    <th><div class="row"><div id="star-rate" class="mx-3"></div><%= shop.shop_posts.average(:rate).to_f.round(1) %> 点</div></th>
+  </tr>
+</table>
+
+<script>
+let map;
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+  map = new google.maps.Map(document.getElementById('map'), {
+  center: {
+    lat: <%= @shop.latitude %>,
+    lng: <%= @shop.longitude %>
+  },
+  zoom: 16,
+  });
+  
+  merker = new google.maps.Marker({
+    position: {
+      lat: <%= @shop.latitude %>,
+      lng: <%= @shop.longitude %>
+    },
+    map: map
+  })
+}
+</script>
+<script async
+      src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
+</script>
+
+<script>
+ $('#star-rate').empty();
+  $('#star-rate').raty({
+    size: 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    half: true,
+    readOnly: true,
+    score: "<%= shop.shop_posts.average(:rate).to_f.round(1) %>",
+  });
+</script>
