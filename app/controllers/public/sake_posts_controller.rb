@@ -32,6 +32,11 @@ class Public::SakePostsController < ApplicationController
     redirect_to customer_path(current_customer)
   end
   
+  def sakes
+    @sake_posts = SakePost.where(sake_id: params[:sake_id]).page(params[:page]).order("created_at DESC")
+    render :index
+  end
+  
   private
   
   def sake_post_params

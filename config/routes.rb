@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     post "search_sake_rate" => "sakes#rate" #rateで絞り込み
     post "search_sake_select" => "sakes#sake_select"
     resources :sakes, only:[:index, :show]
+    post "sakes/sake_posts" => "sake_posts#sakes"
     resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
       resources :sake_comments, only:[:create, :destroy]
       resource :sake_favorites, only:[:create, :destroy]
@@ -38,6 +39,7 @@ Rails.application.routes.draw do
     get "search_shop" => "shops#search"
     post "search_shop_prefectures" => "shops#prefectures"
     post "search_shop_rate" => "shops#rate"
+    post "search_shop_select" => "shops#shop_select"
     resources :shops, only:[:index, :show] do
       resource :shop_favorites, only:[:create, :destroy]
     end
