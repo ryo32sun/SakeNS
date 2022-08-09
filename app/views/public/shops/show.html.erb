@@ -1,55 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-9">
-      <h1>お店詳細</h1>
-      <div class="row">
-        <div><%= @shop.name %></div>
-        <div id="star-rate"></div><%= @shop.shop_posts.average(:rate).to_f.round(1) %>点
-        <script>
-         $('#star-rate').empty();
-          $('#star-rate').raty({
-            size: 36,
-            starOff:  '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            half: true,
-            readOnly: true,
-            score: "<%= @shop.shop_posts.average(:rate).to_f.round(1) %>",
-          });
-        </script>
-        <% if @shop.favorited_by?(current_customer) %>
-          <p>
-            <%= link_to shop_shop_favorites_path(@shop), method: :delete, class:"text-danger" do %>
-              ♥<%= @shop.shop_favorites.count %> 行きたい！
-            <% end %>
-          </p>
-          <% else %>
-          <p>
-            <%= link_to shop_shop_favorites_path(@shop), method: :post, class:"text-secondary" do %>
-              ♡<%= @shop.shop_favorites.count %> 行きたい！
-            <% end %>
-          </p>
-        <% end %>
-      </div>
-      <h3>店舗所在地</h3>
-      <!--The div element for the map -->
-      <div id="map"></div>
-      <div><%= @shop.address %></div>
-      <div><%= @shop.remark %></div>
-      <div class="row">
-        <% @shop_posts.each do |shop_post| %>
-          <div class="col-3 offset-1">
-            <%= link_to sake_post_path(shop_post.sake_post) do %>
-            <div><%= shop_post.sake_post.sake.name %></div>
-            <div><%= image_tag shop_post.sake_post.get_image(100, 100) %></div>
-            <div>
-              <%= image_tag shop_post.sake_post.customer.get_profile_image(50, 50) %>
-              <%= shop_post.sake_post.impression %>
-            </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <%= render "public/shops/show", shop: @shop %>
+      <h4 class="mt-5 mb-3 p-2 bg-secondary text-light border border-dark">
+        <span class="headline px-3">取り扱い商品<i class="fa-solid fa-wine-bottle ml-2"></i></span>
+      </h4>
+      <%= render "public/shops/sake_index", shop_posts: @shop_posts %>
       <div class="text-right"><%= link_to "もっと見る", sake_posts_path %></div>
       <div class="row">
         
@@ -60,30 +16,3 @@
     </div>
   </div>
 </div>
-
-
-
-<script>
-let map;
-function initMap(){
-  geocoder = new google.maps.Geocoder()
-  map = new google.maps.Map(document.getElementById('map'), {
-  center: {
-    lat: <%= @shop.latitude %>,
-    lng: <%= @shop.longitude %>
-  },
-  zoom: 16,
-  });
-  
-  merker = new google.maps.Marker({
-    position: {
-      lat: <%= @shop.latitude %>,
-      lng: <%= @shop.longitude %>
-    },
-    map: map
-  })
-}
-</script>
-<script async
-      src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">
-</script>
