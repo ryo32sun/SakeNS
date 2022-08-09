@@ -1,0 +1,43 @@
+<div class="row">
+  <h4 class="ml-3">商品名：<%= link_to sake_path(sake),class:"text-dark" do %>
+    <b><u><%= sake.name %></u></b>
+  <% end %></h4>
+  <% if customer == current_customer.id %>
+    <h5 class="mx-auto">のみたい<%= sake_post.sake_favorites.count %>件</h5>
+  <% else %>
+    <% if sake_post.favorited_by?(current_customer) %>
+      <h5 class="text-light mx-auto">
+        <span class="bg-danger px-2 rounded-pill">
+          ♥
+          <%= link_to "のみたい！(取り消す)", sake_post_sake_favorites_path(sake_post), method: :delete, class:"text-light" %>
+        </span>
+      </h5>
+      <% else %>
+      <h5 class="text-danger mx-auto">
+        <span class="bg-light px-2 rounded-pill">
+          ♡
+          <%= link_to "のみたい！", sake_post_sake_favorites_path(sake_post), method: :post, class:"text-danger" %>
+        </span>
+      </h5>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= image_tag sake_post.get_image(1000, 450) %>
+</div>
+<div class="my-3">
+  <%= link_to customer_path(customer) do %>
+    <%= image_tag customer.get_profile_image(100,100) %>
+    <span class="text-dark ml-3"><u>投稿者：<%= customer.name %></u></span>
+  <% end %>
+</div>
+<div class="border border-dark p-1 bg-secondary text-white">
+  <span class="border border-dark bg-white text-dark px-1">感想</span><br>
+  <%= sake_post.impression %>
+</div>
+<% if customer == current_customer %>
+<div class="my-3 d-flex justify-content-end">
+  <%= link_to "投稿編集", edit_sake_post_path(@sake_post), class:"btn btn-success" %>
+  <%= link_to "投稿削除",sake_post_path(sake_post), method: :delete, class:"btn btn-danger ml-2" %> 
+</div>
+<% end %>

@@ -17,12 +17,15 @@ class Public::SakesController < ApplicationController
   
   def prefectures
     prefectures = params[:prefectures]
-    @sakes = Sake.where(prefectures: prefectures).page(params[:page]).order("created_at DESC")
+    if prefectures == "選択してください"
+      @sakes = Sake.page(params[:page]).order("created_at DESC")
+    else
+      @sakes = Sake.where(prefectures: prefectures).page(params[:page]).order("created_at DESC")
+    end
     render :index
   end
   
   def rate
-    # binding.pry
     if params[:sakes] != nil
       sake_ids = params[:sakes].split(",")
       sakes = Sake.where(id: sake_ids).order("created_at DESC").select{ |sake| sake.sake_posts.average(:rate) >= 4}
@@ -32,6 +35,12 @@ class Public::SakesController < ApplicationController
     else
       redirect_to sakes_path
     end
+  end
+  
+  def sake_select
+    # binding.pry
+    @select = params[:sake_select]
+    @sakes = Sake.page(params[:page]).order("created_at DESC")
   end
   
 end

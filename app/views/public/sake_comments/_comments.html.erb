@@ -1,0 +1,20 @@
+<div>
+  <p class="d-flex justify-content-end">コメント件数 : <%= sake_post.sake_comments.count %> 件</p>
+  <% sake_post.sake_comments.each do |comment| %>
+    <div class="row ml-2 mb-3 bg-secondary p-2 pr-4 text-white border border-dark">
+      <div class="col-2 d-flex align-items-center">
+        <%= image_tag comment.customer.get_profile_image(80,80) %><br>
+      </div>
+      <div class="col-7">
+        コメント：<%= comment.comment %><br>
+        投稿日：<%= comment.created_at.strftime("%m/%d") %><br>
+        ユーザー名：<%= comment.customer.name %>
+      </div>
+      <% if comment.customer == current_customer %>
+        <div class="d-flex align-items-end col-3">
+          <%= link_to "コメント削除", sake_post_sake_comment_path(comment.sake_post, comment), method: :delete, class:"btn btn-danger" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

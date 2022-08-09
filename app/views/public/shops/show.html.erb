@@ -64,7 +64,6 @@
 
 
 <script>
-  
 let map;
 function initMap(){
   geocoder = new google.maps.Geocoder()
@@ -84,7 +83,6 @@ function initMap(){
     map: map
   })
 }
-
 </script>
 <script async
       src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap">

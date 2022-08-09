@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     get "search_sake" => "sakes#search"
     post "search_sake_prefectures" => "sakes#prefectures" #都道府県で絞り込み
     post "search_sake_rate" => "sakes#rate" #rateで絞り込み
+    post "search_sake_select" => "sakes#sake_select"
     resources :sakes, only:[:index, :show]
     resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
       resources :sake_comments, only:[:create, :destroy]

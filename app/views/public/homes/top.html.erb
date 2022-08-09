@@ -5,14 +5,15 @@
         <div class="main-text">
         </div>
       </div>
+      <h4 class="mt-5 mb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3"> 新 着 投 稿 <i class="fa-solid fa-bottle-droplet pl-2"></i></span>
+      </h4>
       <div>
-        <span><h4>新着投稿</h4></span>
-      </div>
-      <div class="row">
         <%= render "public/sake_posts/index", sake_posts: @sake_posts %>
       </div>
+      <%= link_to "投稿一覧へ", sake_posts_path, class:"btn btn-info border border-secondary float-right" %>
     </div>
-    <div class="col-2 offset-1">
+    <div class="col-2 ml-auto">
       <%= render "sidebar" %>
     </div>
   </div>

@@ -1,8 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-9">
-      <h1>投稿一覧（お酒）</h1>
+      <h2 class="mb-5 p-2 bg-secondary text-light">
+        <span class="headline px-3">投 稿 一 覧（お酒）<i class="fa-solid fa-bottle-droplet pl-2"></i></span>
+      </h2>
       <%= render "index", sake_posts: @sake_posts %>
+      <div class="justify-content-center d-flex">
+        <%= paginate @sake_posts %>
+      </div>
     </div>
     <div class="col-2 offset-1">
       <%= render "public/homes/sidebar" %>
