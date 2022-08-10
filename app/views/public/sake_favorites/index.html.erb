@@ -1,29 +1,20 @@
 <div class="container">
   <div class="row">
     <div class="col-9">
-      <h1>飲みたい投稿一覧</h1>
-      <div class="row">
-      <% @sake_favorites.each do |fav| %>
-        <div class="col-3 offset-1">
-          <%= link_to sake_post_path(fav.sake_post) do %>
-          <div><%= fav.sake_post.sake.name %></div>
-          <div><%= image_tag fav.sake_post.get_image(100, 100) %></div>
-          <div class="row">
-            <div class="col-3">
-              <%= image_tag fav.sake_post.customer.get_profile_image(50, 50) %><br>
-            </div>
-            <div class="col-5">
-              <%= fav.sake_post.impression %>
-            </div>
-          </div>
-          <div><%= fav.sake_post.customer.name %></div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <div>
-      <%= paginate @sake_favorites %>
-    </div>
+      <h3 class="mb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3">飲みたいお酒一覧<i class="fa-solid fa-bottle-droplet pl-2"></i></span>
+      </h3>
+      <%= render "public/sake_favorites/sake_index", sake_favorites: @sake_favorites %>
+      <div class="justify-content-center d-flex">
+        <%= paginate @sake_favorites, :param_name => "sake_page" %>
+      </div>
+      <h3 class="mb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3">行きたいお店一覧<i class="fa-solid fa-store ml-2"></i></span>
+      </h3>
+      <%= render "public/sake_favorites/shop_index", shop_favorites: @shop_favorites %>
+      <div class="justify-content-center d-flex">
+        <%= paginate @shop_favorites, :param_name => "shop_page" %>
+      </div>
     </div>
     <div class="col-2 offset-1">
       <%= render "public/homes/sidebar" %>

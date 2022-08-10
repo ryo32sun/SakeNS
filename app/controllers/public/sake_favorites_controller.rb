@@ -1,6 +1,8 @@
 class Public::SakeFavoritesController < ApplicationController
   def index
-    @sake_favorites = current_customer.sake_favorites.page(params[:page])
+    customer = Customer.find(params[:customer_id])
+    @sake_favorites = customer.sake_favorites.page(params[:sake_page]).per(6)
+    @shop_favorites = customer.shop_favorites.page(params[:shop_page]).per(5)
   end
   
   def create

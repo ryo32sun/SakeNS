@@ -1,7 +1,7 @@
 <div class="row">
   <% sake_posts.each do |sake_post| %>
   <div class="card text-white bg-secondary mb-3" style="width: calc(94% / 3); margin: 0 calc(6% / 6)">
-    <%= image_tag sake_post.get_image(200,200), class:"bd-placeholder-img card-img-top", style:"height: 180px;" %>
+    <%= image_tag sake_post.get_image(500,500), class:"bd-placeholder-img card-img-top", style:"height: 180px;" %>
     <span class="sake-post-genre float-right px-1"><%= sake_post.sake.sake_genre.genre %></span>
     <div class="card-body">
       <h5 class="card-title"><%= sake_post.sake.name %></h5>

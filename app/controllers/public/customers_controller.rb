@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
   def show
     @customer = current_customer
-    @posts = @customer.sake_posts.order("created_at DESC").limit(3)
+    @sake_posts = @customer.sake_posts.order("created_at DESC").limit(3)
   end
 
   def edit

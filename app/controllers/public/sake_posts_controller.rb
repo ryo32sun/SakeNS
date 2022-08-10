@@ -2,6 +2,11 @@ class Public::SakePostsController < ApplicationController
   def index
     @sake_posts = SakePost.page(params[:page]).order("created_at DESC")
   end
+  
+  def customer
+    @sake_posts = SakePost.where(customer_id: params[:customer_id]).page(params[:page]).order("created_at DESC")
+    render :index
+  end
 
   def edit
     @sake_post = SakePost.find(params[:id])

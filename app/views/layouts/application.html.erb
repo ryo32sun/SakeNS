@@ -17,6 +17,7 @@
     <%= render "layouts/header" %>
     <main class="py-5">
       <%= yield %>
+      <%= link_to "前ページに戻る", :back, class:"btn btn-outline-warning fixed-bottom ml-auto mb-3 mr-3", style:"width: 150px;" %>
     </main>
     <%= render "layouts/footer" %>
   </body>

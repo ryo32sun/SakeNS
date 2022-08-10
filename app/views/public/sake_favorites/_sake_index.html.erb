@@ -1,0 +1,36 @@
+<div class="row">
+  <% sake_favorites.each do |fav| %>
+  <div class="card text-white bg-secondary mb-3" style="width: calc(94% / 3); margin: 0 calc(6% / 6)">
+    <%= image_tag fav.sake_post.get_image(200,200), class:"bd-placeholder-img card-img-top", style:"height: 180px;" %>
+    <span class="sake-post-genre float-right px-1"><%= fav.sake_post.sake.sake_genre.genre %></span>
+    <div class="card-body">
+      <h5 class="card-title"><%= fav.sake_post.sake.name %></h5>
+      <div class="row">
+        <div class="col-4">
+          <%= image_tag fav.sake_post.customer.get_profile_image(70, 70) %><br>
+          <span class="ml-2 text-truncate"><%= fav.sake_post.customer.name %></span>
+        </div>
+        <div class="col-8">
+          <p class="card-text text-truncate"><%= fav.sake_post.impression %></p>
+          <!--星評価-->
+          <div id="star-rate<%= fav.sake_post.id %>"></div>
+          <script>
+            $('#star-rate<%= fav.sake_post.id %>').empty();
+            $('#star-rate<%= fav.sake_post.id %>').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              readOnly: true,
+              score: "<%= fav.sake_post.rate %>"
+            });
+          </script>
+          <!--ここまで-->
+          <span class="float-right"><%= link_to "詳細へ", sake_post_path(fav.sake_post), class:"btn btn-primary mt-2" %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
