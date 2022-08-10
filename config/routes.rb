@@ -45,7 +45,6 @@ Rails.application.routes.draw do
     resources :shops, only:[:index, :show] do
       resource :shop_favorites, only:[:create, :destroy]
     end
-    get "shop_favorites/index"
     post "shop_posts/new"
     resources :shop_posts, only:[:update, :destroy, :create]
     get 'searches/search'
