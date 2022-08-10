@@ -1,36 +1,38 @@
 <div class="container">
-  <h2>マイページ</h2>
+  <h3 class="mt-5 mb-4 p-2 bg-secondary text-light">
+    <span class="headline px-3"> マイページ <i class="fa-solid fa-house-user pl-2"></i></span>
+  </h3>
   <div class="row">
     <div class="col-9">
       <div class="row">
-        <div class="col-3">
-          <div><%= image_tag @customer.get_profile_image(150, 150) %></div>
+        <div class="col-3 offset-1">
+          <div class="mb-3"><%= image_tag @customer.get_profile_image(150, 150), class:"border border-dark" %></div>
           <%= link_to "お気に入り一覧", sake_favorites_index_path, class:"btn btn-primary" %>
         </div>
-        <div class="col-4">
-          <p>ユーザー名：<%= @customer.name %></p>
-          <p>自己紹介：<%= @customer.introduction %></p>
-        </div>
-        <div>
-          <%= link_to "編集", edit_customer_path(@customer), class:"btn btn-success" %>
+        <div class="col-8">
+          <%= link_to "編集", edit_customer_path(@customer), class:"btn btn-success float-right" %>
+          <table class="table table-secondary table-bordered mt-5">
+            <tr>
+              <td class="col-3">ユーザー名:</td>
+              <td class="col-9"><%= @customer.name %></td>
+            </tr>
+            <tr>
+              <td>自己紹介:</td>
+              <td><%= @customer.introduction %></td>              
+            </tr>
+          </table>
         </div>
       </div>
-      <p>新着投稿</p>
-      <div class="row">
-        <% @posts.each do |sake_post| %>
-          <div class="col-3 offset-1">
-            <%= link_to sake_post_path(sake_post) do %>
-              <%= sake_post.sake.name %><br>
-              <%= image_tag sake_post.get_image(100,100) %><br>
-              <%= image_tag sake_post.customer.get_profile_image(50, 50) %>
-              <%= sake_post.impression %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <h4 class="mt-5 mb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3"> 新 着 投 稿 <i class="fa-solid fa-bottle-droplet pl-2"></i></span>
+      </h4>
+      <%= render "public/sake_posts/index", sake_posts: @sake_posts %>
 
       <div class="ml-auto col-2">
-        <%= link_to "投稿一覧へ", sake_posts_path, class:"btn btn-primary" %>
+        <%= form_with url: customer_sake_posts_path do |f| %>
+          <%= f.hidden_field :customer_id, :value => @customer.id %>
+          <%= f.submit "投稿一覧へ", class:"btn btn-primary" %>
+        <% end %>
       </div>
     </div>
     <div class="col-2 offset-1 border">

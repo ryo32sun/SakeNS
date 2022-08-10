@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     post "search_sake_select" => "sakes#sake_select"
     resources :sakes, only:[:index, :show]
     post "sakes/sake_posts" => "sake_posts#sakes"
+    post "customer/sake_posts" => "sake_posts#customer"
     resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
       resources :sake_comments, only:[:create, :destroy]
       resource :sake_favorites, only:[:create, :destroy]
