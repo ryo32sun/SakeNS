@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-3 offset-1">
           <div class="mb-3"><%= image_tag @customer.get_profile_image(150, 150), class:"border border-dark" %></div>
-          <%= link_to "お気に入り一覧", sake_favorites_index_path, class:"btn btn-primary" %>
+          <%= link_to "お気に入り一覧", customer_sake_favorites_index_path(@customer), class:"btn btn-primary" %>
         </div>
         <div class="col-8">
           <%= link_to "編集", edit_customer_path(@customer), class:"btn btn-success float-right" %>

@@ -4,7 +4,7 @@ class Shop < ApplicationRecord
   
   has_many :shop_posts, dependent: :destroy
   has_many :shop_favorites, dependent: :destroy
-  
+
   geocoded_by :address
   after_validation :geocode
   

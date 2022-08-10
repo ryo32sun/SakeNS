@@ -24,8 +24,9 @@ Rails.application.routes.draw do
   scope module: :public do
     get "customers/check"
     patch "customers/out"
-    resources :customers, only:[:show, :edit, :update]
-    get "sake_favorites/index"
+    resources :customers, only:[:show, :edit, :update] do
+      get "sake_favorites/index"
+    end
     get "search_sake" => "sakes#search"
     post "search_sake_prefectures" => "sakes#prefectures" #都道府県で絞り込み
     post "search_sake_rate" => "sakes#rate" #rateで絞り込み

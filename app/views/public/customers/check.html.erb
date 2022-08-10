@@ -1,11 +1,20 @@
 <div class="container">
-  <h1>本当に退会しますか？</h1>
-  <div class="row">
-    <div>
-      <%= link_to "退会しない", customer_path(current_customer), class:"btn btn-info" %>
-    </div>
-    <div>
-      <%= link_to "退会する", customers_out_path, method: :patch, class:"btn btn-danger" %>
+  <div class="col-12 mx-auto col-md-10 col-lg-8 card shadow-lg border border-success">
+    <div class="card-body">
+      <h3 class="card-title mb-4 text-center">本当に退会しますか？</h3>
+      <div class="row">
+        <div class="col-12 col-md-10 mx-auto">
+          <div class="card-text text-center mb-5">
+            退会すると投稿の編集や削除ができなくなります。<br>
+            またサイトの仕様上、退会後も投稿は閲覧が可能な状態となります。<br>
+            投稿を非公開とする場合は退会前に削除してください。
+          </div>
+          <div class="d-flex justify-content-around">
+            <%= link_to "退会しない", customer_path(current_customer), class:"btn btn-info" %>
+            <%= link_to "退会する", customers_out_path, method: :patch, class:"btn btn-danger", "data-confirm" => "本当に退会しますか？" %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
