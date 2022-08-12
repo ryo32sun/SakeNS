@@ -3,6 +3,8 @@
     <div class="card-body">
       <h2 class="card-title mb-4">新規投稿（お酒）</h2>
       <div class="row">
+        <%= render "public/shared/error_messages", resource: @sake %>
+        <%= render "public/shared/error_messages", resource: @sake_post %>
         <div class="col-12 col-md-8 mx-auto">
           <%= form_with model: @sake_post, url: shop_posts_new_path do |f| %>
             <div class="form-group">

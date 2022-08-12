@@ -9,6 +9,10 @@ class SakePost < ApplicationRecord
   
   has_one_attached :image
   
+  validates :rate, presence: true
+  validates :impression, presence: true
+  validates :image, presence: { message: 'を登録してください'}
+  
   def favorited_by?(customer)
     sake_favorites.exists?(customer_id: customer.id)
   end

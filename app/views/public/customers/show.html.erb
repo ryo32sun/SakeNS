@@ -10,7 +10,11 @@
           <%= link_to "お気に入り一覧", customer_sake_favorites_index_path(@customer), class:"btn btn-primary" %>
         </div>
         <div class="col-8">
-          <%= link_to "編集", edit_customer_path(@customer), class:"btn btn-success float-right" %>
+          <% if customer_signed_in? %>
+            <% if @customer == current_customer %>
+              <%= link_to "編集", edit_customer_path(@customer), class:"btn btn-success float-right" %>
+            <% end %>
+          <% end %>
           <table class="table table-secondary table-bordered mt-5">
             <tr>
               <td class="col-3">ユーザー名:</td>

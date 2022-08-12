@@ -8,6 +8,7 @@ class Public::SakeCommentsController < ApplicationController
     sake_comment.customer_id = current_customer.id
     sake_comment.sake_post_id = @sake_post.id
     sake_comment.save
+    
   end
   
   def destroy

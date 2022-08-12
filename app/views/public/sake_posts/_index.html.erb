@@ -7,8 +7,10 @@
       <h5 class="card-title"><%= sake_post.sake.name %></h5>
       <div class="row">
         <div class="col-4">
-          <%= image_tag sake_post.customer.get_profile_image(70, 70) %><br>
-          <span class="ml-2 text-truncate"><%= sake_post.customer.name %></span>
+          <%= link_to customer_path(sake_post.customer) do %>
+            <%= image_tag sake_post.customer.get_profile_image(70, 70) %><br>
+            <span class="ml-2 text-truncate text-light"><%= sake_post.customer.name %></span>
+          <% end %>
         </div>
         <div class="col-8">
           <p class="card-text text-truncate"><%= sake_post.impression %></p>

@@ -13,8 +13,11 @@ class Public::ShopPostsController < ApplicationController
     end
     @sake_post.sake_id = @sake.id
     @sake_post.customer_id = current_customer.id
-    @sake_post.save
-    
+    if @sake_post.save
+    else
+      @genres =SakeGenre.all
+      render template: "public/sake_posts/new" and return
+    end
     @shop = Shop.new
     @genres = ShopGenre.all
   end
@@ -34,6 +37,8 @@ class Public::ShopPostsController < ApplicationController
     if @shop_post.save
       redirect_to sake_post_path(@shop_post.sake_post_id)
     else
+      @sake_post = SakePost.find_by(id: params[:shop][:sake_post_id])
+      @genres = ShopGenre.all
       render :new
     end
   end

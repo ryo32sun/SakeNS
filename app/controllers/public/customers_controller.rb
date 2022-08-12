@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   def show
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
     @sake_posts = @customer.sake_posts.order("created_at DESC").limit(3)
   end
 
@@ -10,8 +10,11 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = current_customer
-    @customer.update(customer_params)
-    redirect_to customer_path(@customer)
+    if  @customer.update(customer_params)
+      redirect_to customer_path(@customer)
+    else
+      render :edit
+    end
   end
 
   def check
