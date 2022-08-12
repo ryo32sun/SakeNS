@@ -4,7 +4,8 @@
 .main-visual {
   height: 300px;
   width: auto;
-  background-image: url(/images/mv2.jpg);
+  background-image: image-url("mv2.jpg");
+  // background-image: url(/images/mv2.jpg);
   background-size: cover;
   background-position: center;
 }
