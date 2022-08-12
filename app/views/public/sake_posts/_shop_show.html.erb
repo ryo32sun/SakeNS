@@ -40,8 +40,10 @@
       <span class="bg-white border border-dark text-dark px-1">備考</span><br>
       <%= shop_post.shop.remark %>
     </div>
-    <% if customer == current_customer %>
-      <%= link_to "店情報削除", shop_post_path(shop_post),method: :delete, class:"btn btn-danger float-right" %>
+    <% if customer_signed_in? %>
+      <% if customer == current_customer %>
+        <%= link_to "店情報削除", shop_post_path(shop_post),method: :delete, class:"btn btn-danger float-right" %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

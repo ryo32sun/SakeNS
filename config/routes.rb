@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     post "genres/sake_create"
     post "genres/shop_create"
     resources :shops, only:[:index, :edit, :update, :destroy]
+    get "customer/sake_posts" => "sake_posts#customer"
     resources :shop_posts, only:[:index, :destroy]
     resources :sakes, only:[:index, :edit, :update, :destroy]
     resources :sake_posts, only:[:index, :update, :destroy, :show, :edit]

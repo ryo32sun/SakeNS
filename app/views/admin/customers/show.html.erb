@@ -1,24 +1,40 @@
 <div class="container">
   <div class="row">
     <div class="col-8 mx-auto">
+      <h3 class="mt-5 mb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3">会員詳細<i class="fa-solid fa-users ml-2"></i></span>
+      </h3>
       <div>
-        <span><h2>会員詳細</h2></span>
+        <table class="table col-12 border table-hover table-secondary table-striped table-bordered">
+          <tbody>
+            <tr>
+              <th>ユーザー名：</th>
+              <td><%= @customer.name %></td>
+            </tr>
+            <tr>
+              <th>メールアドレス：</th>
+              <td><%= @customer.email %></td>
+            </tr>
+            <tr>
+              <th>自己紹介：</th>
+              <td><%= @customer.introduction %></td>
+            </tr>
+            <tr>
+              <th>会員ステータス</th>
+              <td>
+                <% if @customer.status == "有効" %>
+                  <b class="text-success"><%= @customer.status %></b>
+                <% else %>
+                  <b class="text-danger"><%= @customer.status %></b>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <div class="row px-3 d-flex justify-content-around">
+        <div><%= link_to "投稿一覧", admin_customer_sake_posts_path(customer_id: @customer.id), class:"btn btn-primary", style:"width: 200px;" %></div>
+        <div><%= link_to "編集", edit_admin_customer_path(@customer), class:"btn btn-success", style:"width: 200px;" %></div>
       </div>
-      <div>
-        ユーザー名：<%= @customer.name %>
-      </div>
-      <div>
-        メールアドレス：<%= @customer.email %>
-      </div>
-      <div>
-        自己紹介：<%= @customer.introduction %>
-      </div>
-      <div>
-        会員ステータス：<%= @customer.status %>
-      </div>
-      <div class="row">
-        <div class="btn btn-info">投稿一覧</div>
-        <div><%= link_to "編集", edit_admin_customer_path(@customer), class:"btn btn-success" %></div>
       </div>
     </div>
   </div>

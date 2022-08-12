@@ -1,7 +1,9 @@
 <div class="container">
-  <h1>ジャンル一覧・新規登録</h1>
+  <h3 class="mt-3 mb-4 p-2 bg-secondary text-light">
+    <span class="headline px-3">ジャンル一覧・新規登録</span>
+  </h3>
   <div class="row">
-    <div class="col-5">
+    <div class="col-4 mx-auto">
       <h4>お酒ジャンル</h4>
       <div>
         <%= form_with model: @sake_genre, url: admin_genres_sake_create_path do |f| %>
@@ -9,14 +11,18 @@
           <%= f.submit "登録" %>
         <% end %>
       </div>
-      <div class="border">
-        <% @sake_genres.each do |sake_genre| %>
-          <%= sake_genre.genre %>
-          <%= link_to "編集", edit_admin_genre_path(sake_genre), class:"btn btn-success" %><br>
-        <% end %>
+      <div>
+        <table class="mt-3 mb-5">
+          <% @sake_genres.each do |sake_genre| %>
+            <tr>
+              <td><div class="mr-5">・<%= sake_genre.genre %></div></td>
+              <td><%= link_to "編集", edit_admin_genre_path(sake_genre), class:"btn btn-success" %></td>
+            </tr>
+          <% end %>
+        </table>
       </div>
     </div>
-    <div class="col-5">
+    <div class="col-4 ml-auto">
       <h4>お店ジャンル</h4>
       <div>
         <%= form_with model: @shop_genre, url: admin_genres_shop_create_path do |f| %>
@@ -24,11 +30,13 @@
           <%= f.submit "登録" %>
         <% end %>
       </div>
-      <div class="border">
+      <table class="mt-3 mb-5">
         <% @shop_genres.each do |shop_genre| %>
-          <%= shop_genre.genre %><br>
+          <tr class="mb-2">
+            <td>・<%= shop_genre.genre %></td>
+          </tr>
         <% end %>
-      </div>
+      </table>
     </div>
   </div> 
 </div>
