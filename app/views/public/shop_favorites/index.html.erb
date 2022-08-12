@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <div>
+        <h1>行きたいお店一覧</h1>
+      </div>
+      <div>
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr class="table-secondary">
+              <th>店名</th>
+              <th>業態</th>
+              <th>住所</th>
+              <th>平均評価</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @favorites.each do |fav| %>
+              <tr>
+                <td><%= fav.shop.name %></td>
+                <td><%= fav.shop.shop_genre.genre %></td>
+                <td><%= fav.shop.address %></td>
+                <td><div id="star-rate-<%= fav.shop.id %>"></div>
+                  <script>
+                   $('#star-rate-<%= fav.shop.id %>').empty();
+                    $('#star-rate-<%= fav.shop.id %>').raty({
+                      size: 36,
+                      starOff:  '<%= asset_path('star-off.png') %>',
+                      starOn : '<%= asset_path('star-on.png') %>',
+                      starHalf: '<%= asset_path('star-half.png') %>',
+                      half: true,
+                      readOnly: true,
+                      score: "<%= fav.shop.shop_posts.average(:rate).to_f.round(1) %>",
+                    });
+                  </script>
+                </td>
+                <td><%= link_to "詳細", shop_path(fav.shop), class:"btn btn-primary" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div>
+          <%= paginate @favorites %>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>

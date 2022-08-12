@@ -1,0 +1,19 @@
+<% if customer == current_customer.id %>
+  <h5 class="mx-auto">のみたい<%= sake_post.sake_favorites.count %>件</h5>
+<% else %>
+  <% if sake_post.favorited_by?(current_customer) %>
+    <h5 class="text-light mx-auto">
+      <span class="bg-danger px-2 rounded-pill">
+        ♥
+        <%= link_to "のみたい！(取り消す)", sake_post_sake_favorites_path(sake_post), method: :delete, remote: true, class:"text-light" %>
+      </span>
+    </h5>
+    <% else %>
+    <h5 class="text-danger mx-auto">
+      <span class="bg-light px-2 rounded-pill">
+        ♡
+        <%= link_to "のみたい！", sake_post_sake_favorites_path(sake_post), method: :post, remote: true, class:"text-danger" %>
+      </span>
+    </h5>
+  <% end %>
+<% end %>

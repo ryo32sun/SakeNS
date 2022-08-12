@@ -1,0 +1,21 @@
+// Place all the styles related to the public/homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.main-visual {
+  height: 300px;
+  width: auto;
+  background-image: url(/images/mv2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.sake-post-genre {
+  position:  absolute;  
+  top: 5px;
+  right: 5px;
+  background-color: #00000055;
+}
+
+.headline {
+  background-color: #000000aa;
+}

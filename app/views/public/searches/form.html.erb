@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="col-12 mx-auto col-md-8 col-lg-6 card shadow-lg border border-success">
+    <div class="card-body">
+      <h4 class="smb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3">検索フォーム<i class="fa-solid fa-magnifying-glass ,l-2"></i></span>
+      </h4>
+      <div class="row">
+        <div class="col-12 col-md-9 col-lg-11 mx-auto">
+          <div class="mt-4"><%= render "forms" %></div>
+          <div class="border border-primary p-1 mt-4">
+            <h5 class="mt-1"><span class="p-1 bg-light">酒ジャンル検索</span></h5>
+            <% @genres.each do |genre| %>
+              <span class="pr-3"> ・<%= link_to genre.genre, search_sake_path(keyword: genre.id), class:"text-dark" %>  </span>
+            <% end %>
+          </div>
+          <div class="border border-primary p-1 mt-4">
+            <h5 class="mt-1"><span class="p-1 bg-light">店ジャンル検索</span></h5>
+            <% ShopGenre.all.each do |genre| %>
+              <div><span>・<%= link_to genre.genre, search_shop_path(keyword: genre.id), class:"text-dark" %></span></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

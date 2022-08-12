@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="col-12 mx-auto col-md-8 col-lg-6 card shadow-lg border border-success">
+    <div class="card-body">
+      <h3 class="card-title mb-4">投稿編集(お酒)</h3>
+      <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+          <%= form_with model: @sake_post, url: admin_sake_post_path(@sake_post) do |f| %>
+            <table class="table table-borderless">
+              <tr>
+                <td style="width: 50%;"><%= f.label :name, "商品名" %></td>
+                <td><%= @sake_post.sake.name %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :sake_genre_id, "種類" %></td>
+                <td><%= @sake_post.sake.sake_genre.genre %></td>
+              </tr>
+              <tr>
+                <td><%= f.label :prefectures, "都道府県" %></td>
+                <td><%= @sake_post.sake.prefectures %></td>
+              </tr>
+            </table>
+            <div class="form-group">
+              <%= f.label "画像" %>
+              <%= image_tag @sake_post.get_image(200, 200) %>
+              <%= f.file_field :image, accept: "image/*" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :feature, "特徴" %>
+              <%= f.text_area :feature, class:"form-control border border-primary", rows:"4" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :impression, "感想" %>
+              <%= f.text_area :impression, class:"form-control border border-primary", rows:"4" %>
+            </div>
+            <div id="star" class="form-group">
+              <%= f.label :rate, "レビュー" %>
+              <%= f.hidden_field :rate, id: :review_star %>
+            </div>
+            <script>
+              $('#star').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'sake_post[rate]',
+                half: true,
+              });
+            </script>  
+            <div class="text-center">
+              <%= f.submit "更新", class:"btn btn-success", style:"width: 200px;" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

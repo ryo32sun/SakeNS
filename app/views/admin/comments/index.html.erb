@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9 mx-auto">
+      <h3 class="mt-5 mb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3">コメント一覧</span>
+      </h3>
+      <div>
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr class="table-secondary">
+              <th>ユーザー名</th>
+              <th>商品名</th>
+              <th>コメント内容</th>
+              <th>投稿日</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @comments.each do |comment| %>
+              <tr>
+                <td><%= comment.customer.name %></td>
+                <td><%= comment.sake_post.sake.name %></td>
+                <td><%= comment.comment %></td>
+                <td><%= comment.created_at.strftime("%Y/%m/%d") %></td>
+                <td><%= link_to "削除", admin_comment_path(comment),method: :delete, class:"btn btn-danger", data: {confirm: "削除しますか？"} %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div>
+          <%= paginate @comments %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

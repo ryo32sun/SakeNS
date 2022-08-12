@@ -1,0 +1,27 @@
+<% if s_select != nil %>
+  <% if s_select == "1" %>
+    <div>
+      <%= form_with url: search_shop_prefectures_path do |f| %>
+        <%= f.label :prefectures, "所在地で絞り込み" %>
+        <%= f.select :prefectures, Shop.prefectures.keys, {} %>
+        <% shops.each do |shop| %>
+          <%= f.hidden_field :shops, :multiple => true, :value => shop.id %>
+        <% end %>
+        <%= f.submit "絞り込み", class:"btn btn-primary" %>
+      <% end %>
+    </div>
+  <% elsif s_select == "2" %>
+    <div>
+      <%= form_with url: search_shop_rate_path do |d| %>
+        <% shops.each do |shop| %>
+          <%= d.hidden_field :shops, :multiple => true, :value => shop.id %>
+        <% end %>
+        <%= d.submit "高評価のみを表示する" %>
+      <% end %>
+    </div>
+  <% elsif s_select == "3" %>
+    <div>
+      <%= render "public/searches/form" %>
+    </div>
+  <% end %>
+<% end %>

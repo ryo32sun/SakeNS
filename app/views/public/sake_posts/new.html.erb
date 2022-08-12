@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="col-12 mx-auto col-md-8 col-lg-6 card shadow-lg border border-success">
+    <div class="card-body">
+      <h2 class="card-title mb-4">新規投稿（お酒）</h2>
+      <div class="row">
+        <%= render "public/shared/error_messages", resource: @sake %>
+        <%= render "public/shared/error_messages", resource: @sake_post %>
+        <div class="col-12 col-md-8 mx-auto">
+          <%= form_with model: @sake_post, url: shop_posts_new_path do |f| %>
+            <div class="form-group">
+              <%= f.label :name, "商品名" %>
+              <%= f.text_field :name, class:"form-control border border-primary"  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :sake_genre_id, "種類" %>
+              <%= f.select :sake_genre_id, @genres.map{|genre| [genre.genre, genre.id] }, {}, {class:"form-control border border-primary"} %>
+            </div>
+            <div>
+              <%= f.label :prefectures, "都道府県" %>
+              <%= f.select :prefectures, Sake.prefectures.keys, {}, {class:"form-control border border-primary"} %>
+            </div>
+            <div class="form-group">
+              <%= f.label "画像" %>
+              <%= f.file_field :image, accept: "image/*"  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :feature, "特徴" %>
+              <%= f.text_area :feature, class:"form-control border border-primary", rows:"5", placeholder:"味わい、製法などお酒の特徴を記入ください"  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :impression, "感想" %>
+              <%= f.text_area :impression, class:"form-control border border-primary", rows:"5"  %>
+            </div>
+            <div id="star" class="mb-3">
+              <%= f.label :rate, "総合評価", class:"mr-2" %>
+              <%= f.hidden_field :rate, id: :review_star %>
+            </div>
+            <script>
+              $('#star').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'sake_post[rate]',
+                half: true,
+              });
+            </script>  
+            <div class="text-center">
+              <%= f.submit "投稿/お店の登録へ進む", class:"btn btn-info" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

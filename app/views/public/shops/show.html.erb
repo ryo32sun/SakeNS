@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <%= render "public/shops/show", shop: @shop %>
+      <h4 class="mt-5 mb-3 p-2 bg-secondary text-light border border-dark">
+        <span class="headline px-3">取り扱い商品<i class="fa-solid fa-wine-bottle ml-2"></i></span>
+      </h4>
+      <%= render "public/shops/sake_index", shop_posts: @shop_posts %>
+      <div class="text-right"><%= link_to "もっと見る", sake_posts_path %></div>
+      <div class="row">
+        
+      </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>

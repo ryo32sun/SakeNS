@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <h3 class="mt-5 mb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3"> 会 員 一 覧 <i class="fa-solid fa-users ml-2"></i></span>
+      </h3>
+      <div>
+        <table class="table col-12 border table-hover table-secondary table-striped table-bordered">
+          <thead>
+            <tr class="text-center">
+              <th></th>
+              <th>ユーザー名</th>
+              <th>メールアドレス</th>
+              <th>ステータス</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @customers.each do |customer| %>
+              <tr>
+                <td><%= image_tag customer.get_profile_image(50,50) %></td>
+                <td><%= customer.name %></td>
+                <td><%= customer.email %></td>
+                <td class="text-center">
+                  <% if customer.is_deleted == false %>
+                    <b class="text-success">有効</b>
+                  <% else %>
+                    <b class="text-danger">無効</b>
+                  <% end %>
+                </td>
+                <td class="text-center"><%= link_to "詳細", admin_customer_path(customer) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

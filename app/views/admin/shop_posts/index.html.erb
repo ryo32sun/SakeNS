@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9 mx-auto">
+      <h3 class="mt-5 mb-4 p-2 bg-secondary text-light">
+        <span class="headline px-3">お店投稿一覧</span>
+      </h3>
+      <div>
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr class="table-secondary">
+              <th>ユーザー名</th>
+              <th>店名</th>
+              <th>評価</th>
+              <th>更新日時</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @shop_posts.each do |shop_post| %>
+              <tr>
+                <td><%= shop_post.customer.name %></td>
+                <td><%= shop_post.shop.name %></td>
+                <td><%= shop_post.rate %>点</td>
+                <td><%= shop_post.updated_at.strftime("%Y/%m/%d") %></td>
+                <td><%= link_to "削除", admin_shop_post_path(shop_post),method: :delete, class:"btn btn-danger", data: {confirm: "削除しますか？"} %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div>
+          <%= paginate @shop_posts %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

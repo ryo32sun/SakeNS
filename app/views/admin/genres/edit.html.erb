@@ -1,0 +1,9 @@
+<p>現在のジャンル名: <%= @sake_genre.genre %></p>
+<div>
+  <%= form_with model: @sake_genre, url: admin_genre_path(@sake_genre) do |f| %>
+    <div>
+      <%= f.text_field :genre %>
+    </div>
+    <%= f.submit "更新", class:"btn btn-success" %>
+  <% end %>
+</div>

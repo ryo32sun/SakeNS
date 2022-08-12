@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+        <% if @genre != nil %>
+          <h2 class="mb-2 p-2 bg-secondary text-light border border-dark">
+            <span class="headline px-3">
+              <%= @genre.genre %>一覧<i class="fa-solid fa-store ml-2"></i>
+            </span>
+          </h2>
+        <% else %>
+          <h2 class="mb-2 p-2 bg-secondary text-light border border-dark">
+            <span class="headline px-3">
+              お 店 一 覧<i class="fa-solid fa-store ml-2"></i>
+            </span>
+          </h2>
+        <% end %>
+      <% if @word != nil %>
+        <h4 class="mt-3">
+          <span class="p-1 bg-dark text-dark border border-dark">
+            <span class="search-word px-3">検索ワード : "<%= @word %>"</span>
+          </span>
+        </h4>
+      <% end %>
+      <div class="text-center border border-primary rounded-pill pt-2 bg-light mb-3">
+        <%= form_with url: search_shop_select_path, local: false do |f| %>
+          <%= f.select :shop_select, options_for_select([["絞り込み方法を選択", 0], ["生産地で絞り込み", 1], ["高評価で絞り込み", 2], ["キーワードで絞り込み", 3]]), {}, {class: 'form-control col-5 mx-auto border-primary'} %>
+          <%= f.submit "決定", class:"shop-select-btn", style:" display: none;" %>
+        <% end %>
+        <div class="shop-search-select my-1">
+          <%= render "public/shops/search",shops: @shops, s_select: @select %>
+        </div>
+      </div>
+      <div>
+        <% if @shops.any? %>
+          <%= render "public/shops/index", shops: @shops %>
+          <div>
+            <%= paginate @shops %>
+          </div>
+        <% else %>
+          <p class="text-center mt-5">該当のお店はありません。</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>

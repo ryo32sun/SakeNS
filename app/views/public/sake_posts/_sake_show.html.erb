@@ -1,0 +1,35 @@
+<div class="row">
+  <h4 class="ml-3">商品名：<%= link_to sake_path(sake),class:"text-dark" do %>
+    <b><u><%= sake.name %></u></b>
+  <% end %></h4>
+  <% if customer_signed_in? %>
+    <div class="sake-fav-btn mx-auto">
+      <%= render "public/sake_posts/sake_favorite", sake_post: sake_post, customer: customer %>
+    </div>
+  <% end %>
+</div>
+<div>
+  <%= image_tag sake_post.get_image(1000, 450) %>
+</div>
+<div class="my-3">
+  <%= link_to customer_path(customer) do %>
+    <%= image_tag customer.get_profile_image(100,100) %>
+    <span class="text-dark ml-3"><u>投稿者：<%= customer.name %></u></span>
+  <% end %>
+</div>
+<div class="border border-dark p-1 bg-secondary text-white mb-3">
+  <span class="border border-dark bg-white text-dark px-1">特徴</span><br>
+  <%= sake_post.feature %>
+</div>
+<div class="border border-dark p-1 bg-secondary text-white">
+  <span class="border border-dark bg-white text-dark px-1">感想</span><br>
+  <%= sake_post.impression %>
+</div>
+<% if customer_signed_in? %>
+  <% if customer == current_customer %>
+  <div class="my-3 d-flex justify-content-end">
+    <%= link_to "投稿編集", edit_sake_post_path(@sake_post), class:"btn btn-success" %>
+    <%= link_to "投稿削除",sake_post_path(sake_post), method: :delete, class:"btn btn-danger ml-2" %> 
+  </div>
+  <% end %>
+<% end %>

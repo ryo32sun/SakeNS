@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <h2 class="mb-2 p-2 bg-secondary text-light border border-dark">
+        <span class="headline px-3">
+        お 酒 一 覧
+        <% if @genre != nil %>
+          (<%= @genre.genre %>)
+        <% end %>
+        <i class="fa-solid fa-bottle-droplet pl-2"></i>
+        </span>
+      </h2>
+      <% if @word != nil %>
+        <h4 class="mt-3">
+          <span class="p-1 bg-dark text-dark border border-dark">
+            <span class="search-word px-3">検索ワード : "<%= @word %>"</span>
+          </span>
+        </h4>
+      <% end %>
+      <div class="text-center border border-primary rounded-pill pt-2 bg-light mb-3">
+        <%= form_with url: search_sake_select_path, local: false do |f| %>
+          <%= f.select :sake_select, options_for_select([["絞り込み方法を選択", 0], ["生産地で絞り込み", 1], ["高評価で絞り込み", 2], ["キーワードで絞り込み", 3]]), {}, {class: 'form-control col-5 mx-auto border-primary'} %>
+          <%= f.submit "決定", class:"sake-select-btn", style:" display: none;" %>
+        <% end %>
+        <div class="sake-search-select my-1">
+        <%= render "public/sakes/search", sakes: @sakes, s_select: @select %>
+        </div>
+      </div>
+
+      <% if @sakes.any? %>
+        <%= render "public/sakes/index", sakes: @sakes %>
+      <% else %>
+        <p>最初の投稿をお待ちしております！</p>
+      <% end %>
+
+      <div>
+        <%= paginate @sakes %>
+      </div>
+    </div>
+    <div class="col-2 offset-1">
+      <%= render "public/homes/sidebar" %>
+    </div>
+  </div>
+</div>

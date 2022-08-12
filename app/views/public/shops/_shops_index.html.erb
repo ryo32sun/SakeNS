@@ -1,0 +1,37 @@
+<table class="table table-hover table-striped table-dark">
+  <thead>
+    <tr>
+      <th class="col-3">店名</th>
+      <th class="col-2">業態</th>
+      <th class="col-3">住所</th>
+      <th class="col-3">平均評価</th>
+      <th style="col-1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% sake_posts.each do |sake_post| %>
+      <% sake_post.shop_posts.each do |shop_post| %>
+        <tr>
+          <td><%= shop_post.shop.name %></td>
+          <td><%= shop_post.shop.shop_genre.genre %></td>
+          <td><%= shop_post.shop.address %></td>
+          <td><div id="star-rate-<%= shop_post.shop.id %>"></div>
+            <script>
+             $('#star-rate-<%= shop_post.shop.id %>').empty();
+              $('#star-rate-<%= shop_post.shop.id %>').raty({
+                size: 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                half: true,
+                readOnly: true,
+                score: "<%= shop_post.shop.shop_posts.average(:rate).to_f.round(1) %>",
+              });
+            </script>
+          </td>
+          <td><%= link_to "詳細", shop_path(shop_post.shop), class:"btn btn-primary" %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

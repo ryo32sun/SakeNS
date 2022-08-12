@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="col-12 mx-auto col-md-8 col-lg-6 card shadow-lg border border-primary">
+    <div class="card-body">
+      <h3 class="card-title mb-4">新規会員登録</h3>
+      <div class="row">
+        <div class="col-12 col-md-8 mx-auto">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= render "public/shared/error_messages", resource: resource %>
+          
+            <div class="form-group">
+              <h5 class="card-subtitle"><%= f.label :name, "ユーザー名" %></h5>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control border border-primary" %>
+            </div>
+          
+            <div class="form-group">
+              <%= f.label :email, "メールアドレス" %><br />
+              <%= f.email_field :email, autocomplete: "email", class:"form-control border border-primary" %>
+            </div>
+          
+            <div class="form-group">
+              <%= f.label :password, "パスワード" %>
+              <% if @minimum_password_length %>
+                (<%= @minimum_password_length %>文字以上)
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "new-password", class:"form-control border border-primary" %>
+            </div>
+          
+            <div class="form-group">
+              <%= f.label :password_confirmation, "パスワード(確認)" %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control border border-primary" %>
+            </div>
+          
+            <div class="text-right">
+              <%= f.submit "会員登録する", class:"btn btn-primary" %>
+            </div>
+          <% end %>
+          
+          <div class="mt-4 mb-2">★既に会員登録済みの方は<%= render "public/shared/links" %>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
