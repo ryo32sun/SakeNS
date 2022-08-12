@@ -9,6 +9,8 @@ class Customer < ApplicationRecord
   has_many :sake_favorites, dependent: :destroy
   has_many :shop_favorites, dependent: :destroy
   has_many :shop_posts, dependent: :destroy
+  
+  validates :name, length: {minimum: 2}
 
   has_one_attached :profile_image
 

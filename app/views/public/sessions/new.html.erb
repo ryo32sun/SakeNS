@@ -3,6 +3,7 @@
     <div class="card-body">
       <h3 class="card-title mb-4">ログイン</h3>
       <div class="row">
+        <p class="alert text-danger"><%= alert %></p>
         <div class="col-12 col-md-8 mx-auto">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="form-group">

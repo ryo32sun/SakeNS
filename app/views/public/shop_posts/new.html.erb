@@ -3,6 +3,8 @@
     <div class="card-body">
       <h2 class="card-title mb-4">新規投稿（お店）</h2>
       <div class="row">
+        <%= render "public/shared/error_messages", resource: @shop %>
+        <%= render "public/shared/error_messages", resource: @shop_post %>
         <div class="col-12 col-md-8 mx-auto">
           <%= form_with model: @shop,url: shop_posts_path do |f| %>
             <%= f.hidden_field :sake_post_id, :value => @sake_post.id %>

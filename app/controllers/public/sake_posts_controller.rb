@@ -29,6 +29,7 @@ class Public::SakePostsController < ApplicationController
   def new
     @sake_post = SakePost.new
     @genres = SakeGenre.all
+    @sake = Sake.new
   end
   
   def destroy
@@ -45,6 +46,6 @@ class Public::SakePostsController < ApplicationController
   private
   
   def sake_post_params
-    params.require(:sake_post).permit(:image, :feature, :impression, :rate)
+    params.permit(:image, :feature, :impression, :rate)
   end
 end
