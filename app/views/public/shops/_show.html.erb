@@ -7,9 +7,11 @@
   <h4 class="ml-3">店名：<%= link_to shop_path(shop),class:"text-dark" do %>
     <b><u><%= shop.name %></u></b>
   <% end %></h4>
-  <div class="mx-auto shop-favorite-btn">
-    <%= render "public/shops/favorite", shop: shop %>
-  </div>
+  <% if customer_signed_in? %>
+    <div class="mx-auto shop-favorite-btn">
+      <%= render "public/shops/favorite", shop: shop %>
+    </div>
+  <% end %>
   <div class="ml-auto mr-3">
     <h5 class="bg-secondary text-light p-1 px-2 border border-dark">ジャンル：<%= shop.shop_genre.genre %></h5>
   </div>

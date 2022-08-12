@@ -9,9 +9,11 @@
       <div class="sake-comments">
         <%= render "public/sake_comments/comments", sake_post: @sake_post %>
       </div>
-      <div class="comment-form">
-        <%= render "public/sake_comments/comment_form", sake_post: @sake_post, sake_comment: @sake_comment %>
-      </div>
+      <% if customer_signed_in? %>
+        <div class="comment-form">
+          <%= render "public/sake_comments/comment_form", sake_post: @sake_post, sake_comment: @sake_comment %>
+        </div>
+      <% end %>
     </div>
     <div class="col-2 offset-1">
       <%= render "public/homes/sidebar" %>
