@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-9">
       <h3 class="mb-4 p-2 bg-secondary text-light">
-        <span class="headline px-3">飲みたいお酒一覧<i class="fa-solid fa-bottle-droplet pl-2"></i></span>
+        <span class="headline px-3">飲みたいお酒一覧<i class="fas fa-glass-cheers ml-2"></i></span>
       </h3>
       <%= render "public/sake_favorites/sake_index", sake_favorites: @sake_favorites %>
       <div class="justify-content-center d-flex">
         <%= paginate @sake_favorites, :param_name => "sake_page" %>
       </div>
       <h3 class="mb-4 p-2 bg-secondary text-light">
-        <span class="headline px-3">行きたいお店一覧<i class="fa-solid fa-store ml-2"></i></span>
+        <span class="headline px-3">行きたいお店一覧<i class="fas fa-store-alt ml-2"></i></span>
       </h3>
       <%= render "public/sake_favorites/shop_index", shop_favorites: @shop_favorites %>
       <div class="justify-content-center d-flex">

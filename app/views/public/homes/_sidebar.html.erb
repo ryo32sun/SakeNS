@@ -4,7 +4,7 @@
   <div>
     <% SakeGenre.all.each do |genre| %>
       <div class="ml-3">
-        <i class="fa-solid fa-whiskey-glass mr-2"></i><%= link_to genre.genre, search_sake_path(keyword: genre.id), class:"text-dark" %>
+        <i class="fas fa-glass-whiskey mr-2"></i><%= link_to genre.genre, search_sake_path(keyword: genre.id), class:"text-dark" %>
       </div>
     <% end %>
   </div>
@@ -12,7 +12,7 @@
   <div>
     <% ShopGenre.all.each do |genre| %>
     <div class="ml-3">
-      <i class="fa-solid fa-shop mr-2"></i><%= link_to genre.genre, search_shop_path(keyword: genre.id), class:"text-dark" %>
+      <i class="fas fa-store-alt mr-2"></i><%= link_to genre.genre, search_shop_path(keyword: genre.id), class:"text-dark" %>
     </div>
     <% end %>
   </div>

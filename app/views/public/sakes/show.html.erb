@@ -3,7 +3,7 @@
     <div class="col-9">
     <%= render "public/sakes/show", sake: @sake %>
     <h4 class="my-3 p-2 bg-secondary text-light border border-dark">
-      <span class="headline px-3">新 着 投 稿<i class="fa-solid fa-bottle-droplet pl-2"></i></span>
+      <span class="headline px-3">新 着 投 稿<i class="fas fa-wine-bottle ml-2"></i></span>
     </h4>
     <%= render "public/sake_posts/index", sake_posts: @sake_posts %>
     <div>
@@ -15,7 +15,7 @@
       <% end %>
     </div>
     <h4 class="mt-5 mb-3 p-2 bg-secondary text-light border border-dark">
-      <span class="headline px-3">楽しめるお店<i class="fa-solid fa-shop ml-2"></i></span>
+      <span class="headline px-3">楽しめるお店<i class="fas fa-store ml-2"></i></span>
     </h4>
     <%= render "public/sakes/shops_index", sake_posts: @sake_posts %>
     </div>
