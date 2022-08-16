@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-9">
+    <div class="col-12 col-md-10 col-lg-9">
       <h2 class="mb-2 p-2 bg-secondary text-light border border-dark">
         <span class="headline px-3">
         お 酒 一 覧
@@ -37,7 +37,7 @@
         <%= paginate @sakes %>
       </div>
     </div>
-    <div class="col-2 offset-1">
+    <div class="col-2 mx-auto d-none d-md-block">
       <%= render "public/homes/sidebar" %>
     </div>
   </div>

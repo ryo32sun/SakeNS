@@ -14,7 +14,9 @@
         <td><%= fav.shop.name %></td>
         <td><%= fav.shop.shop_genre.genre %></td>
         <td><%= fav.shop.address %></td>
-        <td><div id="star-rate-<%= fav.shop.id %>"></div>
+        <td>
+          <div class="d-md-none"><%= fav.shop.shop_posts.average(:rate) %> 点</div>
+          <div id="star-rate-<%= fav.shop.id %>" class="d-none d-md-block"></div>
           <script>
            $('#star-rate-<%= fav.shop.id %>').empty();
             $('#star-rate-<%= fav.shop.id %>').raty({

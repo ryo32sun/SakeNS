@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   scope module: :public do
     get "customers/check"
     patch "customers/out"
+    get "/following" => "homes#following"
     resources :customers, only:[:show, :edit, :update] do
+      resource :relationships, only: [:create, :destroy]
       get "sake_favorites/index"
     end
     get "search_sake" => "sakes#search"
@@ -35,6 +37,7 @@ Rails.application.routes.draw do
     resources :sakes, only:[:index, :show]
     post "sakes/sake_posts" => "sake_posts#sakes"
     post "customer/sake_posts" => "sake_posts#customer"
+    get "sake_posts/followings" => "sake_posts#following"
     resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
       resources :sake_comments, only:[:create, :destroy]
       resource :sake_favorites, only:[:create, :destroy]

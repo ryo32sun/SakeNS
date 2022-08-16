@@ -1,6 +1,6 @@
 <div class="row">
   <% shop_posts.each do |shop_post| %>
-  <div class="card text-white bg-secondary mb-3" style="width: calc(94% / 3); margin: 0 calc(6% / 6)">
+  <div class="card text-white bg-secondary mb-3 post-card">
     <%= image_tag shop_post.sake_post.get_image(200, 200), class:"bd-placeholder-img card-img-top", style:"height: 150px;" %>
     <span class="sake-post-genre float-right px-1"><%= shop_post.sake_post.sake.sake_genre.genre %></span>
     <div class="card-body">
