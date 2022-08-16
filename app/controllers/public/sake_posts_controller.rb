@@ -3,9 +3,13 @@ class Public::SakePostsController < ApplicationController
     @sake_posts = SakePost.page(params[:page]).order("created_at DESC")
   end
   
-  def customer
+  def customer # ユーザーページからのリンク
     @sake_posts = SakePost.where(customer_id: params[:customer_id]).page(params[:page]).order("created_at DESC")
     render :index
+  end
+  
+  def following
+    @sake_posts = SakePost.where(customer_id: [*current_customer.following_ids]).page(params[:page]).order("created_at DESC")
   end
 
   def edit

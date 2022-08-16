@@ -8,12 +8,18 @@
       <h4 class="mt-5 mb-4 p-2 bg-secondary text-light">
         <span class="headline px-3"> 新 着 投 稿 <i class="fas fa-wine-bottle ml-2"></i></span>
       </h4>
-      <div>
+      <div class="text-center my-3">
+        表示切替：
+        <%= link_to "すべてのユーザー", root_path, remote: :true %>
+        |
+        <%= link_to "フォロー中のユーザー", following_path, remote: :true %>
+      </div>
+      <div class="sake-posts">
         <%= render "public/sake_posts/index", sake_posts: @sake_posts %>
       </div>
       <%= link_to "投稿一覧へ", sake_posts_path, class:"btn btn-info border border-secondary float-right" %>
     </div>
-    <div class="col-2 ml-auto d-none d-md-block">
+    <div class="col-2 mx-auto d-none d-md-block">
       <%= render "sidebar" %>
     </div>
   </div>

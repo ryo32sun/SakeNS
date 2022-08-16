@@ -13,6 +13,12 @@
         <% if customer_signed_in? %>
           <% if @customer == current_customer %>
             <%= link_to "編集", edit_customer_path(@customer), class:"btn btn-success float-right" %>
+          <% else %>
+            <% if current_customer.following?(@customer) %>
+              <%= link_to "フォロー中", customer_relationships_path(@customer.id), method: :delete, class:"btn btn-danger float-right" %>
+            <% else %>
+              <%= link_to "フォロー", customer_relationships_path(@customer.id), method: :post, class:"btn btn-success float-right" %>
+            <% end %>
           <% end %>
         <% end %>
         <table class="table table-secondary table-bordered mt-5">
@@ -38,8 +44,10 @@
         <% end %>
       </div>
     </div>
-    <div class="col-2 ml-auto d-none d-md-block">
+    <div class="col-2 mx-auto d-none d-md-block">
       <%= render "public/homes/sidebar" %>  
     </div>
   </div>
 </div>
+
+
