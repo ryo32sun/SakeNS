@@ -15,12 +15,12 @@
               <%= f.label :sake_genre_id, "種類" %>
               <%= f.select :sake_genre_id, @genres.map{|genre| [genre.genre, genre.id] }, {}, {class:"form-control border border-primary"} %>
             </div>
-            <div>
+            <div class="form-group">
               <%= f.label :prefectures, "都道府県" %>
               <%= f.select :prefectures, Sake.prefectures.keys, {}, {class:"form-control border border-primary"} %>
             </div>
             <div class="form-group">
-              <%= f.label "画像" %>
+              <%= f.label "画像" %><br>
               <%= f.file_field :image, accept: "image/*"  %>
             </div>
             <div class="form-group">
