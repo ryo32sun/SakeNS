@@ -3,7 +3,7 @@
         <div class="container">
 
           <a class="navbar-brand" href="/">
-            <img src="/assets/logo.png" alt="SakeNS" wodth="80" height="80">
+            <%= image_tag asset_path("logo.png"), size:'75x75',alt:"SakeNS" %>
             <div class="text-light">SakeNS</div>
           </a>
           <% if customer_signed_in? %>
