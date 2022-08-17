@@ -34,8 +34,20 @@ class Public::SakePostsController < ApplicationController
     @sake_post = SakePost.new
     @genres = SakeGenre.all
     @sake = Sake.new
+    names = Sake.all.map(&:name)
+    # resond_toでhtmlの場合とjsonの場合の処理を分ける
+    respond_to do |format|
+      format.html 
+      format.json {render json: names.to_json}
+    end
   end
   
+  def auto_complete
+    sakes = Sake.select(:name).where("name like '%" + params[:term] + "%'")
+    sakes = sakes.map(&:name)
+    render json: sakes.to_json 
+  end
+
   def destroy
     @sake_post = SakePost.find(params[:id])
     @sake_post.destroy
