@@ -5,7 +5,6 @@
   <div class="row">
     <div class="col-md-10 col-lg-9">
       <div class="col-md-3 d-md-inline-block">
-        <!--<div class="mb-3 d-inline d-md-block"></div>-->
         <%= image_tag @customer.get_profile_image(150, 150), class:"border border-dark img-fluid" %>
         <%= link_to "お気に入り一覧", customer_sake_favorites_index_path(@customer), class:"btn btn-primary" %>
       </div>
@@ -24,11 +23,15 @@
         <table class="table table-secondary table-bordered mt-5">
           <tr>
             <td class="col-3">ユーザー名:</td>
-            <td class="col-9"><%= @customer.name %></td>
+            <td class="col-9 text-right pr-4"><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <td>投稿数:</td>
+            <td class="text-right pr-4"><%= @count %> 件</td>
           </tr>
           <tr>
             <td>自己紹介:</td>
-            <td><%= @customer.introduction %></td>              
+            <td class="text-right pr-4"><%= @customer.introduction %></td>              
           </tr>
         </table>
       </div>

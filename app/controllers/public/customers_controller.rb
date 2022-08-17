@@ -2,6 +2,7 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @sake_posts = @customer.sake_posts.order("created_at DESC").limit(3)
+    @count = @customer.sake_posts.count
   end
 
   def edit
