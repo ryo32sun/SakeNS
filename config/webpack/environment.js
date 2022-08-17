@@ -12,3 +12,5 @@ environment.plugins.prepend(
     Popper: 'popper.js'
   })
 )
+
+require("jquery-ui/ui/widgets/autocomplete");

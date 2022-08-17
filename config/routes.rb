@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
       resources :sake_comments, only:[:create, :destroy]
       resource :sake_favorites, only:[:create, :destroy]
+      collection do
+        get "auto_complete" 
+      end 
     end
     get "search_shop" => "shops#search"
     post "search_shop_prefectures" => "shops#prefectures"
@@ -50,7 +53,11 @@ Rails.application.routes.draw do
       resource :shop_favorites, only:[:create, :destroy]
     end
     post "shop_posts/new"
-    resources :shop_posts, only:[:update, :destroy, :create]
+    resources :shop_posts, only:[:update, :destroy, :create] do
+      collection do
+        get "auto_complete"
+      end
+    end
     get 'searches/search'
     get 'searches/form'
   end

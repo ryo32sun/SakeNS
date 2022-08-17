@@ -11,5 +11,20 @@ Admin.create!(email: ENV['admin_email'],
 ) 
 
 # coding: utf-8
-ShopGenre.create(:genre => "買えるお店")
-ShopGenre.create(:genre => "飲めるお店")
+ShopGenre.create!([
+  {genre: "買えるお店"},
+  {genre: "飲めるお店"}
+])
+
+SakeGenre.create!([
+  {genre: "日本酒"},
+  {genre: "焼酎"},
+  {genre: "ウイスキー"},
+  {genre: "ビール・発泡酒"},
+  {genre: "ワイン"},
+  {genre: "果実酒"},
+  {genre: "スピリッツ"},
+  {genre: "リキュール"},
+  {genre: "カクテル"},
+  {genre: "その他"}
+])

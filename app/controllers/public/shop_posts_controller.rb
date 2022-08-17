@@ -19,7 +19,21 @@ class Public::ShopPostsController < ApplicationController
       render template: "public/sake_posts/new" and return
     end
     @shop = Shop.new
+    @shop_post = ShopPost.new
     @genres = ShopGenre.all
+    
+    names = Shop.all.map(&:name)
+    # resond_toでhtmlの場合とjsonの場合の処理を分ける
+    respond_to do |format|
+      format.html 
+      format.json {render json: names.to_json}
+    end
+  end
+  
+  def auto_complete
+    shops = Shop.select(:name).where("name like '%" + params[:term] + "%'")
+    shops = shops.map(&:name)
+    render json: shops.to_json 
   end
   
   def create

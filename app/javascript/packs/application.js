@@ -8,6 +8,7 @@ import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "script.js"
+import "sake.js"
 
 import "jquery";
 import "popper.js";
@@ -21,3 +22,6 @@ require('packs/raty')
 Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
+
+
+require("jquery-ui/ui/widgets/autocomplete");

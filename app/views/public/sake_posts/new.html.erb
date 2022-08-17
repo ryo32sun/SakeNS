@@ -9,7 +9,7 @@
           <%= form_with model: @sake_post, url: shop_posts_new_path do |f| %>
             <div class="form-group">
               <%= f.label :name, "商品名" %>
-              <%= f.text_field :name, class:"form-control border border-primary"  %>
+              <%= f.text_field :name, class:"form-control border border-primary", id:"sake-name"  %>
             </div>
             <div class="form-group">
               <%= f.label :sake_genre_id, "種類" %>
@@ -54,3 +54,23 @@
     </div>
   </div>
 </div>
+
+
+
+<!--  load jQuery UI  -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+  integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script>
+  $( function() {
+  $( '#sake-name' ).autocomplete({
+      autoFocus: true,  //テキストフィールドの値をフォーカスされたアイテムの値で置き換える
+      source: "/sake_posts/auto_complete.json",  //サジェストのデータを呼び出す
+      delay: 300,
+      minLength: 1  //オートコンプリートが動作する文字数を指定
+  });
+});
+</script>
