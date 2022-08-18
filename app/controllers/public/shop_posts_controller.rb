@@ -66,7 +66,7 @@ class Public::ShopPostsController < ApplicationController
   def update
     shop_post = ShopPost.find(params[:id])
     shop_post.update(shop_post_params)
-    redirect_to request.referer
+    redirect_to sake_post_path(shop_post.sake_post)
   end
   
   private
