@@ -23,6 +23,7 @@ class Public::CustomersController < ApplicationController
 
   def out
     @customer = current_customer
+    @customer.name = "退会済み"
     @customer.update(is_deleted: true)
     reset_session
     redirect_to root_path
