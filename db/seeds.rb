@@ -6,9 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Admin.create!(email: ENV['admin_email'],
-            password: ENV['password']
+Admin.create!(
+  email: ENV['ad_email'],
+  password: ENV['ad_pass']
 ) 
+
+Customer.create!(
+  email: ENV['cus_email'],
+  name: ENV['cus_name'],
+  password: ENV['cus_pass'],
+)
 
 # coding: utf-8
 ShopGenre.create!([

@@ -9,7 +9,9 @@
     <h5 class="bg-secondary text-light p-1 px-2 border border-dark">ジャンル：<%= sake.sake_genre.genre %></h5>
   </div>
 </div>
-<div><%= image_tag sake.get_image(1000, 450), class:"img-fluid" %></div>
+<div class="bg-dark">
+  <%= image_tag sake.get_image(1000, 450), class:"img-fluid mx-auto d-block" %>
+</div>
 <div class="row ml-2 mt-3">
   <h5 class="col-6">生産地：<%= sake.prefectures %></h5>
   <div class="col-6">

@@ -7,7 +7,7 @@
       <%= render "public/sake_posts/sake_favorite", sake_post: sake_post, customer: customer %>
     </div>
   <% end %>
-  <div class="mx-2 pb-3 d-none d-md-block">
+  <div class="ml-auto mr-2 pb-3 d-none d-md-block">
     評価 : <%= sake_post.rate %> 点
     <div id="star-rate<%= sake_post.id %>" class="ml-auto"></div>
   </div>
