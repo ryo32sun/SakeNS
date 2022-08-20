@@ -8,12 +8,14 @@
     </div>
   <% end %>
 </div>
-<div>
-  <%= image_tag sake_post.get_image(1000, 450), class:"img-fluid" %>
+<div class="bg-dark">
+  <%= image_tag sake_post.get_image(1000, 450), class:"img-fluid mx-auto d-block" %>
 </div>
 <div class="my-3">
   <%= link_to customer_path(customer) do %>
-    <%= image_tag customer.get_profile_image(100,100) %>
+    <div class="post-icon">
+      <%= image_tag customer.get_profile_image(100,100), class:"mx-auto d-block img-fluid" %>
+    </div>
     <span class="text-dark ml-3"><u>投稿者：<%= customer.name %></u></span>
   <% end %>
 </div>

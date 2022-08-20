@@ -7,7 +7,9 @@
       <h5 class="card-title"><%= shop_post.sake_post.sake.name %></h5>
       <div class="row">
         <div class="col-4">
-          <%= image_tag shop_post.sake_post.customer.get_profile_image(70, 70) %><br>
+          <div class="card-icon">
+            <%= image_tag shop_post.sake_post.customer.get_profile_image(70, 70), class:"mx-auto d-block img-fluid" %>
+          </div>
           <span class="ml-2 text-truncate"><%= shop_post.sake_post.customer.name %></span>
         </div>
         <div class="col-8">
