@@ -7,6 +7,10 @@
       <%= render "public/sake_posts/sake_favorite", sake_post: sake_post, customer: customer %>
     </div>
   <% end %>
+  <div class="mx-2 pb-3 d-none d-md-block">
+    評価 : <%= sake_post.rate %> 点
+    <div id="star-rate<%= sake_post.id %>" class="ml-auto"></div>
+  </div>
 </div>
 <div class="bg-dark">
   <%= image_tag sake_post.get_image(1000, 450), class:"img-fluid mx-auto d-block" %>
@@ -16,7 +20,7 @@
     <div class="post-icon">
       <%= image_tag customer.get_profile_image(100,100), class:"mx-auto d-block img-fluid" %>
     </div>
-    <span class="text-dark ml-3"><u>投稿者：<%= customer.name %></u></span>
+    <span class="text-dark"><u>投稿者：<%= customer.name %></u></span>
   <% end %>
 </div>
 <div class="border border-dark p-1 bg-secondary text-white mb-3">
@@ -35,3 +39,18 @@
   </div>
   <% end %>
 <% end %>
+
+
+
+<script>
+  $('#star-rate<%= sake_post.id %>').empty();
+  $('#star-rate<%= sake_post.id %>').raty({
+    size: 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    half: true,
+    readOnly: true,
+    score: "<%= sake_post.rate %>"
+  });
+</script>

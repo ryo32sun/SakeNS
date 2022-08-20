@@ -4,6 +4,7 @@
       <h2 class="card-title mb-4">投稿編集（お酒）</h2>
       <div class="row">
         <div class="col-12 col-md-11 mx-auto">
+          <%= render "public/shared/error_messages", resource: @sake_post %>
           <%= form_with model: @sake_post do |f| %>
             <table class="table table-borderless">
               <tr>
@@ -20,7 +21,10 @@
               </tr>
               <tr>
                 <td><%= f.label "画像" %></td>
-                <td><%= image_tag @sake_post.get_image(200, 200) %><br><%= f.file_field :image, accept: "image/*" %></td>
+                <td>
+                  <%= image_tag @sake_post.get_image(200, 200) %><br>
+                  <%= f.file_field :image, accept: "image/*" %>
+                </td>
               </tr>
               <tr>
                 <td><%= f.label :feature, "特徴" %></td>
@@ -40,7 +44,6 @@
               </tr>
             </table>
               
-
             <script>
               $('#star').raty({
                 size     : 36,
@@ -65,7 +68,7 @@
       <div class="row">
         <div class="col-12 col-md-10 mx-auto">
           <% @sake_post.shop_posts.each do |shop_post| %>
-            <%= form_with model: shop_post, url: shop_post_path(shop_post) do |f| %>
+            <%= form_with model: shop_post do |f| %>
               <table class="table table-borderless">
                 <tr>
                   <td class="col-4"><%= f.label :name, "店名" %></td>
@@ -102,7 +105,7 @@
                   starOff:  '<%= asset_path('star-off.png') %>',
                   starOn : '<%= asset_path('star-on.png') %>',
                   starHalf: '<%= asset_path('star-half.png') %>',
-                  scoreName: 'shop[rate]',
+                  scoreName: 'shop_post[rate]',
                   half: true,
                 });
               </script>  

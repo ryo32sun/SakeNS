@@ -62,6 +62,6 @@ class Public::SakePostsController < ApplicationController
   private
   
   def sake_post_params
-    params.permit(:image, :feature, :impression, :rate)
+    params.require(:sake_post).permit(:image, :feature, :impression, :rate)
   end
 end

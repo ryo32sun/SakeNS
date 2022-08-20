@@ -9,6 +9,13 @@
       <h4 class="d-md-inline-flex">
         店名：<u><%= link_to shop_post.shop.name, shop_path(shop_post.shop), class:"text-dark" %></u>
       </h4>
+      <div class="mx-auto d-none d-lg-block">
+        <% if shop_post.rate >= 3 %>
+          <b class="text-success">評価 : <%= shop_post.rate %></b>
+        <% else %>
+          <b class="text-danger">評価 : <%= shop_post.rate %></b>
+        <% end %>
+      </div>
       <p class="d-md-inline-flex ml-auto text-truncate">住所：<%= shop_post.shop.address %></p>
     </div>
     <div id="map"></div>
@@ -47,4 +54,5 @@
     <% end %>
   <% end %>
 </div>
+
 
