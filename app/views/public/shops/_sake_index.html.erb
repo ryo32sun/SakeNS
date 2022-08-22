@@ -2,7 +2,7 @@
   <% shop_posts.each do |shop_post| %>
     <% if shop_post.sake_post != nil %>
       <div class="card text-white bg-secondary mb-3 post-card">
-        <%= image_tag shop_post.sake_post.get_image(200, 200), class:"bd-placeholder-img card-img-top", style:"height: 150px;" %>
+        <div class="bd-placeholder-img card-img-top image-back"><%= image_tag shop_post.sake_post.get_image(300, 180), class:"card-image"%></div>
         <span class="sake-post-genre float-right px-1"><%= shop_post.sake_post.sake.sake_genre.genre %></span>
         <div class="card-body">
           <h5 class="card-title"><%= shop_post.sake_post.sake.name %></h5>

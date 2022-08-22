@@ -1,10 +1,10 @@
 <div class="row">
   <% sakes.each do |sake| %>
     <div class="card text-white bg-secondary mb-3 post-card">
-      <%= image_tag sake.get_image(500, 500), class:"bd-placeholder-img card-img-top", style:"height: 180px;" %>
+      <div class="card-img-top image-back"><%= image_tag sake.get_image(300, 180), class:"card-image" %></div>
       <span class="sake-post-genre float-right px-1"><%= sake.sake_genre.genre %></span>
       <div class="card-body">
-        <h5 class="card-title">商品名 : <%= sake.name %></h5>
+        <h5 class="card-title text-truncate">商品名 : <%= sake.name %></h5>
         <div class="card-text">生産地 : <%= sake.prefectures %></div>
         <div id="star-rate-<%= sake.id %>" class="my-1"></div>
         <span>評価 : <%= sake.sake_posts.average(:rate).to_f.round(1) %>点</span>

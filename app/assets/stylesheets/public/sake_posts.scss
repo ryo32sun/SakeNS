@@ -6,6 +6,17 @@
   margin: 0 calc(6% / 6);
 }
 
+.card-image {
+  height: 180px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.image-back {
+  background-color: #555;
+  text-align : center
+}
+
 @media screen and (max-width:768px) {
   .post-card {
     width: 90%;
