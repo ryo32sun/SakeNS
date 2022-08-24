@@ -31,8 +31,8 @@ Rails.application.routes.draw do
       get "sake_favorites/index"
     end
     get "search_sake" => "sakes#search"
-    post "search_sake_prefectures" => "sakes#prefectures" #都道府県で絞り込み
-    post "search_sake_rate" => "sakes#rate" #rateで絞り込み
+    get "search_sake_prefectures" => "sakes#prefectures" #都道府県で絞り込み
+    get "search_sake_rate" => "sakes#rate" #rateで絞り込み
     post "search_sake_select" => "sakes#sake_select"
     resources :sakes, only:[:index, :show]
     post "sakes/sake_posts" => "sake_posts#sakes"

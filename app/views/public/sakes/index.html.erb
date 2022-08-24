@@ -23,7 +23,7 @@
           <%= f.submit "決定", class:"sake-select-btn", style:" display: none;" %>
         <% end %>
         <div class="sake-search-select my-1">
-        <%= render "public/sakes/search", sakes: @sakes, s_select: @select %>
+        <%= render "public/sakes/search", sakes: @sakes, s_select: @select, sake_all: @sake_all %>
         </div>
       </div>
 
@@ -33,7 +33,7 @@
         <p>最初の投稿をお待ちしております！</p>
       <% end %>
 
-      <div>
+      <div class="justify-content-center d-flex">
         <%= paginate @sakes %>
       </div>
     </div>

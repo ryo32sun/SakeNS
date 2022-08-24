@@ -33,7 +33,7 @@
       <div>
         <% if @shops.any? %>
           <%= render "public/shops/index", shops: @shops %>
-          <div>
+          <div class="justify-content-center d-flex">
             <%= paginate @shops %>
           </div>
         <% else %>
