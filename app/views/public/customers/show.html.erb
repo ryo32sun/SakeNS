@@ -41,7 +41,7 @@
       <%= render "public/sake_posts/index", sake_posts: @sake_posts %>
 
       <div>
-        <%= form_with url: customer_sake_posts_path do |f| %>
+        <%= form_with url: customer_sake_posts_path, method: :get do |f| %>
           <%= f.hidden_field :customer_id, :value => @customer.id %>
           <%= f.submit "投稿一覧へ", class:"btn btn-primary float-right" %>
         <% end %>

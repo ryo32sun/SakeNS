@@ -1,6 +1,7 @@
 class Public::SakesController < ApplicationController
   def index
     @sakes = Sake.page(params[:page]).order("created_at DESC")
+    @s_all = Sake.all
   end
 
   def show
@@ -10,8 +11,8 @@ class Public::SakesController < ApplicationController
   end
   
   def search
-    sakes = Sake.search(params[:keyword])
-    @sakes = sakes.page(params[:page]).order("created_at DESC")
+    @s_all = Sake.search(params[:keyword])
+    @sakes = @s_all.page(params[:page]).order("created_at DESC")
     genre_id = params[:keyword]
     @genre = SakeGenre.find_by(id: genre_id)
     render :index
@@ -19,12 +20,8 @@ class Public::SakesController < ApplicationController
   
   def prefectures
     prefectures = params[:prefectures]
-    if prefectures == "選択してください"
-      @sakes = Sake.page(params[:page]).order("created_at DESC")
-    else
-      sakes = Sake.where(prefectures: prefectures)
-      @sakes = sakes.page(params[:page]).order("created_at DESC")
-    end
+    @s_all = Sake.where(prefectures: prefectures)
+    @sakes = @s_all.page(params[:page]).order("created_at DESC")
     render :index
   end
   
@@ -33,8 +30,8 @@ class Public::SakesController < ApplicationController
     if params[:sakes] != nil
       sake_ids = params[:sakes].split(",")
       sakes = Sake.where(id: sake_ids).select{ |sake| sake.sake_posts.average(:rate) >= 4}
-      sakes = Sake.where(id: sakes.map(&:id))
-      @sakes = sakes.page(params[:page]).order("created_at DESC")
+      @s_all = Sake.where(id: sakes.map(&:id))
+      @sakes = @s_all.page(params[:page]).order("created_at DESC")
       # @sakes = Kaminari.paginate_array(sakes).page(params[:page])
       #配列にページネーションをする際は"Kaminari.paginate_array(配列)"と記述する
       render :index
@@ -46,7 +43,12 @@ class Public::SakesController < ApplicationController
   def sake_select
     # binding.pry
     @select = params[:sake_select]
-    @sake_all = Sake.all
+    if params[:sakes] != nil
+      sake_ids = params[:sakes].split(",")
+      @s_all = Sake.where(id: sake_ids)
+    else
+      @s_all = Sake.all
+    end
     # @sakes = Sake.page(params[:page]).order("created_at DESC")
   end
   

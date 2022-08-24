@@ -1,6 +1,7 @@
 class Public::SakePostsController < ApplicationController
   def index
     @sake_posts = SakePost.page(params[:page]).order("created_at DESC")
+    @switch = true
   end
   
   def customer # ユーザーページからのリンク
@@ -10,6 +11,9 @@ class Public::SakePostsController < ApplicationController
   
   def following
     @sake_posts = SakePost.where(customer_id: [*current_customer.following_ids]).page(params[:page]).order("created_at DESC")
+    @switch = true
+    render :index
+    #byebug
   end
 
   def edit

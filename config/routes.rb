@@ -35,8 +35,8 @@ Rails.application.routes.draw do
     get "search_sake_rate" => "sakes#rate" #rateで絞り込み
     post "search_sake_select" => "sakes#sake_select"
     resources :sakes, only:[:index, :show]
-    post "sakes/sake_posts" => "sake_posts#sakes"
-    post "customer/sake_posts" => "sake_posts#customer"
+    get "sake/sake_posts" => "sake_posts#sakes"
+    get "customer/sake_posts" => "sake_posts#customer"
     get "sake_posts/followings" => "sake_posts#following"
     resources :sake_posts, only:[:index, :edit, :update, :destroy, :show, :new] do
       resources :sake_comments, only:[:create, :destroy]

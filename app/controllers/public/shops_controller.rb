@@ -1,6 +1,7 @@
 class Public::ShopsController < ApplicationController
   def index
     @shops = Shop.page(params[:page]).order("created_at DESC")
+    @s_all = Shop.all
   end
 
   def show
@@ -9,7 +10,8 @@ class Public::ShopsController < ApplicationController
   end
   
   def search
-    @shops = Shop.search(params[:keyword]).page(params[:page])
+    @s_all = Shop.search(params[:keyword])
+    @shops = @s_all.page(params[:page])
     genre_id = params[:keyword]
     @genre = ShopGenre.find_by(id: genre_id)
     render :index
@@ -17,20 +19,32 @@ class Public::ShopsController < ApplicationController
   
   def prefectures
     prefectures = params[:prefectures]
-    @shops = Shop.where(prefectures: prefectures).page(params[:page]).order("created_at DESC")
+    shop_ids = params[:shops].split(",")
+    shops = Shop.where(id: shop_ids).select{ |shop| shop.prefectures == prefectures}
+    @s_all = Shop.all
+    # @s_all = Shop.where(prefectures: prefectures)
+    @shops = Shop.where(id: shops.map(&:id)).page(params[:page]).order("created_at DESC")
     render :index
   end
   
   def shop_select
     @select = params[:shop_select]
-    @shops = Shop.all.order("created_at DESC")
+    if params[:shops] != nil
+      shop_ids = params[:shops].split(",")
+      @s_all = Shop.where(id: shop_ids)
+    else
+      @s_all = Shop.all
+    end
+    # @shops = Shop.all.order("created_at DESC")
   end
   
   def rate
+    # binding.pry
     if params[:shops] != nil
       shop_ids = params[:shops].split(",")
       shops = Shop.where(id: shop_ids).select{ |shop| shop.shop_posts.average(:rate) >= 4}
-      @shops = Shop.where(id: shops.map(&:id)).page(params[:page]) 
+      @s_all = Shop.where(id: shops.map(&:id))
+      @shops = @s_all.page(params[:page]) 
       #配列にページネーションをする際は"Kaminari.paginate_array(配列)"と記述する
       render :index
     else

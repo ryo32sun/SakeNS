@@ -4,7 +4,7 @@
       <h2 class="mb-3 p-2 bg-secondary text-light">
         <span class="headline px-3">投 稿 一 覧（お酒）<i class="fas fa-wine-bottle mx-2"></i> </span>
       </h2>
-      <% if @sake_posts == SakePost.page(params[:page]).order("created_at DESC") %>
+      <% if @switch != nil %>
         <div class="text-center mb-3">
           表示切替：
           <%= link_to "すべてのユーザー", sake_posts_path, remote: :true %>
@@ -13,10 +13,7 @@
         </div>
       <% end %>
       <div class="sake-posts">
-        <%= render "index", sake_posts: @sake_posts %>
-        <div class="justify-content-center d-flex">
-          <%= paginate @sake_posts %>
-        </div>
+        <%= render "posts", sake_posts: @sake_posts %>
       </div>
     </div>
     <div class="col-2 mx-auto d-none d-md-block">

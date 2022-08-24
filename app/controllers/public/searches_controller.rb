@@ -6,10 +6,12 @@ class Public::SearchesController < ApplicationController
     model = params[:model]
     @word = params[:word]
     if model == "Sake"
-      @sakes = Sake.look(params[:word]).page(params[:page]).order("created_at DESC")
+      @s_all = Sake.look(params[:word])
+      @sakes = @s_all.page(params[:page]).order("created_at DESC")
       render template: "public/sakes/index"
     else
-      @shops = Shop.look(params[:word]).page(params[:page]).order("created_at DESC")
+      @s_all = Shop.look(params[:word])
+      @shops = @s_all.page(params[:page]).order("created_at DESC")
       render template: "public/shops/index"
     end
   end

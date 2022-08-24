@@ -7,7 +7,7 @@
     </h4>
     <%= render "public/sake_posts/index", sake_posts: @sake_posts %>
     <div>
-      <%= form_with url: sakes_sake_posts_path do |f|%>
+      <%= form_with url: sake_sake_posts_path, method: :get do |f|%>
         <%= f.hidden_field :sake_id, :multiple => true, :value => @sake.id %>
         <div class="float-right mb-3">
           <%= f.submit "もっと見る", class:"btn" %>

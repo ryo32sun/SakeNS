@@ -35,6 +35,12 @@ Customer.create!([
     name: "ビール党",
     password: "000000",
   },
+  {
+    email: "a@d",
+    name: "退会済み",
+    password: "000000",
+    is_deleted: true,
+  },
 ])
 
 # coding: utf-8
@@ -325,7 +331,7 @@ SakePost.create!([
   {
     # name: "千歳鶴",
     sake_id: 15,
-    customer_id: 2,
+    customer_id: 1,
     feature: "特徴をここに記述します２",
     impression: "感想をここに記述します２",
     rate: 4.5,
@@ -361,7 +367,7 @@ SakePost.create!([
   {
     # name: "赤兎馬",
     sake_id: 19,
-    customer_id: 3,
+    customer_id: 1,
     feature: "特徴をここに記述します２",
     impression: "感想をここに記述します２",
     rate: 4,
@@ -615,7 +621,7 @@ ShopPost.create!([
   {
     shop_id: 13,
     sake_post_id: 15,
-    customer_id: 2,
+    customer_id: 1,
     rate: 5
   },
   {
@@ -639,7 +645,7 @@ ShopPost.create!([
   {
     shop_id: 15,
     sake_post_id: 19,
-    customer_id: 3,
+    customer_id: 1,
     rate: 5
   },
   {
