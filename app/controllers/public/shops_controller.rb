@@ -23,14 +23,14 @@ class Public::ShopsController < ApplicationController
   
   def shop_select
     @select = params[:shop_select]
-    @shops = Shop.page(params[:page]).order("created_at DESC")
+    @shops = Shop.all.order("created_at DESC")
   end
   
   def rate
     if params[:shops] != nil
       shop_ids = params[:shops].split(",")
       shops = Shop.where(id: shop_ids).select{ |shop| shop.shop_posts.average(:rate) >= 4}
-      @shops = Kaminari.paginate_array(shops).page(params[:page]) 
+      @shops = Shop.where(id: shops.map(&:id)).page(params[:page]) 
       #配列にページネーションをする際は"Kaminari.paginate_array(配列)"と記述する
       render :index
     else

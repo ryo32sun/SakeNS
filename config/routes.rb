@@ -46,8 +46,8 @@ Rails.application.routes.draw do
       end 
     end
     get "search_shop" => "shops#search"
-    post "search_shop_prefectures" => "shops#prefectures"
-    post "search_shop_rate" => "shops#rate"
+    get "search_shop_prefectures" => "shops#prefectures"
+    get "search_shop_rate" => "shops#rate"
     post "search_shop_select" => "shops#shop_select"
     resources :shops, only:[:index, :show] do
       resource :shop_favorites, only:[:create, :destroy]

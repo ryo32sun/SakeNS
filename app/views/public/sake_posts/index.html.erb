@@ -14,9 +14,9 @@
       <% end %>
       <div class="sake-posts">
         <%= render "index", sake_posts: @sake_posts %>
-      </div>
-      <div class="justify-content-center d-flex">
-        <%= paginate @sake_posts %>
+        <div class="justify-content-center d-flex">
+          <%= paginate @sake_posts %>
+        </div>
       </div>
     </div>
     <div class="col-2 mx-auto d-none d-md-block">

@@ -1,0 +1,42 @@
+<div class="row">
+  <% sake_posts.each do |sake_post| %>
+  <div class="card text-white bg-secondary mb-3 post-card">
+    <div class="bd-placeholder-img card-img-top image-back"><%= image_tag sake_post.get_image(300,180), class:"card-image" %></div>
+    <span class="sake-post-genre float-right px-1"><%= sake_post.sake.sake_genre.genre %></span>
+    <div class="card-body">
+      <h5 class="card-title text-truncate"><%= sake_post.sake.name %></h5>
+      <div class="row">
+        <div class="col-4 col-md-6 col-lg-4">
+          <%= link_to customer_path(sake_post.customer) do %>
+            <div class="card-icon"><%= image_tag sake_post.customer.get_profile_image(70, 70), class:"mx-auto d-block" %></div>
+            <span class="text-truncate text-light"><%= sake_post.customer.name %></span>
+          <% end %>
+        </div>
+        <div class="col-8 col-md-6 col-lg-8">
+          <p class="card-text text-truncate"><%= sake_post.impression %></p>
+          <!--星評価-->
+          <div id="star-rate<%= sake_post.id %>" class="d-md-none d-lg-block"></div>
+          <div class="d-lg-none">評価 : <%= sake_post.rate %> 点</div>
+          <script>
+            $('#star-rate<%= sake_post.id %>').empty();
+            $('#star-rate<%= sake_post.id %>').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              readOnly: true,
+              score: "<%= sake_post.rate %>"
+            });
+          </script>
+          <!--ここまで-->
+          <span class="float-right"><%= link_to "詳細へ", sake_post_path(sake_post), class:"btn btn-primary mt-2" %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="justify-content-center d-flex">
+  <%= paginate sake_posts %>
+</div>
