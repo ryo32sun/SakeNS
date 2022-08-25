@@ -29,13 +29,13 @@
 
 ## 設計書
 * ER図
-![ER図](assets/images/ER.png "ER")
+![ER図](app/assets/images/ER.png "ER")
 
 * UIFlow(customer)
-![UIFlow](images/Flows_ca.png "Flow_ca")
+![UIFlow](app/assets/images/Flows_ca.png "Flow_ca")
 
 * UIFlow(admin)
-![UIFlow](images/Flows_ad.png "Flow_ad")
+![UIFlow](app/assets/images/Flows_ad.png "Flow_ad")
 
 * ワイヤーフレーム(customer)
 > [ワイヤーフレーム](https://github.com/ryo32sun/SakeNS/files/9423752/CA.drawio.1.pdf)
