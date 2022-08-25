@@ -29,7 +29,7 @@
 
 ## 設計書
 * ER図
-![ER図](asetts/images/ER.png "ER")
+![ER図](assets/images/ER.png "ER")
 
 * UIFlow(customer)
 ![UIFlow](images/Flows_ca.png "Flow_ca")
