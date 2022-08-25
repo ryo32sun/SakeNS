@@ -5,12 +5,14 @@
         <span class="headline px-3">
         お 酒 一 覧
         <% if @genre != nil %>
+        <!--ジャンル検索時に飲み表示される-->
           (<%= @genre.genre %>)
         <% end %>
         <i class="fas fa-wine-bottle ml-2"></i>
         </span>
       </h2>
       <% if @word != nil %>
+      <!--キーワード検索時にのみ表示される-->
         <h4 class="mt-3">
           <span class="p-1 bg-dark text-dark border border-dark">
             <span class="search-word px-3">検索ワード : "<%= @word %>"</span>
@@ -20,6 +22,7 @@
       <div class="text-center border border-primary rounded-pill pt-2 bg-light mb-3">
         <%= form_with url: search_sake_select_path, local: false do |f| %>
           <%= f.select :sake_select, options_for_select([["絞り込み方法を選択", 0], ["生産地で絞り込み", 1], ["高評価で絞り込み", 2], ["キーワードで絞り込み", 3]]), {}, {class: 'form-control col-5 mx-auto border-primary'} %>
+          <!--現在表示されている商品を配列でコントローラーに送る-->
           <% @s_all.each do |sake| %>
             <%= f.hidden_field :sakes, :multiple => true, :value => sake.id %>
           <% end %>

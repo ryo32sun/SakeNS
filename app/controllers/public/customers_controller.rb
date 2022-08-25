@@ -1,4 +1,6 @@
 class Public::CustomersController < ApplicationController
+  before_action :autheniticate_customer, {only: [:edit, :update]}
+  
   def show
     @customer = Customer.find(params[:id])
     @sake_posts = @customer.sake_posts.order("created_at DESC").limit(3)

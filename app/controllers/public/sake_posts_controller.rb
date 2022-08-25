@@ -1,19 +1,30 @@
 class Public::SakePostsController < ApplicationController
+  before_action :autheniticate_customer, {only: [:edit, :update, :destroy, :new]}
+  before_action :ensure_current_customer, {only: [:edit, :update]}
+  
+  def ensure_current_customer
+    customer_id = SakePost.find(params[:id]).customer_id
+    if current_customer.id != customer_id
+      redirect_to("/sake_posts")
+    end
+  end
+  
   def index
     @sake_posts = SakePost.page(params[:page]).order("created_at DESC")
     @switch = true
   end
   
-  def customer # ユーザーページからのリンク
+  def customer 
+  # ユーザーページからのリンク
     @sake_posts = SakePost.where(customer_id: params[:customer_id]).page(params[:page]).order("created_at DESC")
     render :index
   end
   
   def following
+    # 投稿一覧フォロー中のユーザーのみの表示
     @sake_posts = SakePost.where(customer_id: [*current_customer.following_ids]).page(params[:page]).order("created_at DESC")
     @switch = true
     render :index
-    #byebug
   end
 
   def edit
@@ -38,6 +49,7 @@ class Public::SakePostsController < ApplicationController
     @sake_post = SakePost.new
     @genres = SakeGenre.all
     @sake = Sake.new
+    # オートコンプリートのために必要な記述
     names = Sake.all.map(&:name)
     # resond_toでhtmlの場合とjsonの場合の処理を分ける
     respond_to do |format|
@@ -59,6 +71,7 @@ class Public::SakePostsController < ApplicationController
   end
   
   def sakes
+    # 商品に関連した投稿一覧
     @sake_posts = SakePost.where(sake_id: params[:sake_id]).page(params[:page]).order("created_at DESC")
     render :index
   end
