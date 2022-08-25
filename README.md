@@ -58,6 +58,5 @@
 - API：Google Maps Platform
 
 ## 使用素材
-<...>
 - [Font Awesome5.15.4](https://fontawesome.com/)
 - [icon-pit](https://icon-pit.com/policy)
