@@ -28,7 +28,26 @@
 * 接待でおいしいお酒が飲めるお店を探しているとき
 
 ## 設計書
-<...>
+* ER図
+![ER図](images/ER.png "ER")
+
+* UIFlow(customer)
+![UIFlow](images/Flow_ca.png "Flow_ca")
+
+* UIFlow(admin)
+![UIFlow](images/Flow_ad.png "Flow_ad")
+
+* ワイヤーフレーム(customer)
+- [ワイヤーフレーム](https://github.com/ryo32sun/SakeNS/files/9423752/CA.drawio.1.pdf)
+
+* ワイヤーフレーム(admin)
+- [ワイヤーフレーム](https://github.com/ryo32sun/SakeNS/files/9423762/AD.drawio.pdf)
+
+* テーブル定義書
+- [テーブル定義書](https://docs.google.com/spreadsheets/d/1Ri3KQecOxeJipN9agatkrED78Eu3yMe1tHB3H52VtpA/edit#gid=1373217982)
+
+* アプリケーション詳細設計
+- [アプリケーション詳細設計](https://docs.google.com/spreadsheets/d/1lTVAbTKgItdUzL3Z8qWrXSCoIboia9HlxMrNd7_YPjA/edit#gid=549108681)
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -40,3 +59,5 @@
 
 ## 使用素材
 <...>
+- [Font Awesome5.15.4](https://fontawesome.com/)
+- [icon-pit](https://icon-pit.com/policy)
