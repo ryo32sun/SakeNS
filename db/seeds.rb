@@ -492,14 +492,14 @@ Shop.create!([
   {
     shop_genre_id: 1,
     name: "イオンモール座間",
-    prefectures: 1,
+    prefectures: 14,
     remark: "ここに電話番号や営業日など記述します２",
     address: "神奈川県座間市広野台２丁目１０−４",
   },
   {
     shop_genre_id: 1,
     name: "千歳鶴酒ミュージアム",
-    prefectures: 14,
+    prefectures: 1,
     remark: "ここに電話番号や営業日など記述します２",
     address: "北海道札幌市中央区南３条東５丁目2",
   },
