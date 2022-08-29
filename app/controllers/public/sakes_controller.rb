@@ -30,7 +30,7 @@ class Public::SakesController < ApplicationController
     if params[:sakes] != nil
       sake_ids = params[:sakes].split(",")
       sakes = Sake.where(id: sake_ids)
-      # .select{ |sake| (sake.sake_posts.average(:rate) >= 4)}
+      sakes = sakes.select{ |sake| (sake.sake_posts.average(:rate) >= 4)}
       @s_all = Sake.where(id: sakes.map(&:id))
       @sakes = @s_all.page(params[:page]).order("created_at DESC")
       # @sakes = Kaminari.paginate_array(sakes).page(params[:page])
