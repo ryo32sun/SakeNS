@@ -42,7 +42,8 @@ class Public::ShopsController < ApplicationController
     # binding.pry
     if params[:shops] != nil
       shop_ids = params[:shops].split(",")
-      shops = Shop.where(id: shop_ids).select{ |shop| shop.shop_posts.average(:rate) >= 4}
+      shops = Shop.where(id: shop_ids).select{ |shop| shop.shop_posts.any? == true}
+      shops = shops.select{ |shop| shop.shop_posts.average(:rate) >= 4}
       @s_all = Shop.where(id: shops.map(&:id))
       @shops = @s_all.page(params[:page]) 
       #配列にページネーションをする際は"Kaminari.paginate_array(配列)"と記述する
